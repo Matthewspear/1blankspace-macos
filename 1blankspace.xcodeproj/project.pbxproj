@@ -10,10 +10,13 @@
 		1A11CDB76CE3C401EAB13D08 /* Pods_1blankspaceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930F0F9C788E935F30943C69 /* Pods_1blankspaceTests.framework */; };
 		6EB4625766CD960B9AE89998 /* Pods_1blankspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469776E87867314E17575E20 /* Pods_1blankspace.framework */; };
 		A3670E521D52A485007CFE86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E511D52A485007CFE86 /* AppDelegate.swift */; };
-		A3670E541D52A485007CFE86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E531D52A485007CFE86 /* ViewController.swift */; };
 		A3670E561D52A485007CFE86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3670E551D52A485007CFE86 /* Assets.xcassets */; };
 		A3670E591D52A485007CFE86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3670E571D52A485007CFE86 /* Main.storyboard */; };
 		A3670E641D52A485007CFE86 /* _blankspaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E631D52A485007CFE86 /* _blankspaceTests.swift */; };
+		A3670E741D52B2F0007CFE86 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E731D52B2F0007CFE86 /* LoginViewController.swift */; };
+		A3670E761D52B5A3007CFE86 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E751D52B5A3007CFE86 /* PanelViewController.swift */; };
+		A3670E781D52BA56007CFE86 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E771D52BA56007CFE86 /* MainViewController.swift */; };
+		A3670E811D52C111007CFE86 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E801D52C111007CFE86 /* APIRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +36,16 @@
 		930F0F9C788E935F30943C69 /* Pods_1blankspaceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_1blankspaceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3670E4E1D52A485007CFE86 /* 1blankspace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1blankspace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3670E511D52A485007CFE86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3670E531D52A485007CFE86 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A3670E551D52A485007CFE86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3670E581D52A485007CFE86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3670E5A1D52A485007CFE86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3670E5F1D52A485007CFE86 /* 1blankspaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 1blankspaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3670E631D52A485007CFE86 /* _blankspaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _blankspaceTests.swift; sourceTree = "<group>"; };
 		A3670E651D52A485007CFE86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3670E731D52B2F0007CFE86 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A3670E751D52B5A3007CFE86 /* PanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
+		A3670E771D52BA56007CFE86 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A3670E801D52C111007CFE86 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		F208434BF1A918B39870FF1F /* Pods-1blankspace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspace/Pods-1blankspace.debug.xcconfig"; sourceTree = "<group>"; };
 		FB7C3B88D0B0CBABE8636683 /* Pods-1blankspaceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspaceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspaceTests/Pods-1blankspaceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,10 +93,10 @@
 		A3670E501D52A485007CFE86 /* 1blankspace */ = {
 			isa = PBXGroup;
 			children = (
-				A3670E511D52A485007CFE86 /* AppDelegate.swift */,
-				A3670E531D52A485007CFE86 /* ViewController.swift */,
+				A3670E7A1D52BA98007CFE86 /* Model */,
+				A3670E7B1D52BA9E007CFE86 /* View */,
+				A3670E791D52BA7F007CFE86 /* Controller */,
 				A3670E551D52A485007CFE86 /* Assets.xcassets */,
-				A3670E571D52A485007CFE86 /* Main.storyboard */,
 				A3670E5A1D52A485007CFE86 /* Info.plist */,
 			);
 			path = 1blankspace;
@@ -103,6 +109,33 @@
 				A3670E651D52A485007CFE86 /* Info.plist */,
 			);
 			path = 1blankspaceTests;
+			sourceTree = "<group>";
+		};
+		A3670E791D52BA7F007CFE86 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A3670E511D52A485007CFE86 /* AppDelegate.swift */,
+				A3670E731D52B2F0007CFE86 /* LoginViewController.swift */,
+				A3670E771D52BA56007CFE86 /* MainViewController.swift */,
+				A3670E751D52B5A3007CFE86 /* PanelViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A3670E7A1D52BA98007CFE86 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A3670E801D52C111007CFE86 /* APIRequest.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A3670E7B1D52BA9E007CFE86 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A3670E571D52A485007CFE86 /* Main.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		AB17013591A9FCDDABC8151D /* Pods */ = {
@@ -324,8 +357,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3670E541D52A485007CFE86 /* ViewController.swift in Sources */,
+				A3670E741D52B2F0007CFE86 /* LoginViewController.swift in Sources */,
 				A3670E521D52A485007CFE86 /* AppDelegate.swift in Sources */,
+				A3670E761D52B5A3007CFE86 /* PanelViewController.swift in Sources */,
+				A3670E811D52C111007CFE86 /* APIRequest.swift in Sources */,
+				A3670E781D52BA56007CFE86 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +485,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = 1blankspace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.matthewspear.-blankspace";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -462,6 +499,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = 1blankspace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.matthewspear.-blankspace";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
