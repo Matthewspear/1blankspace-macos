@@ -9,18 +9,34 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
-  func applicationDidFinishLaunching(aNotification: NSNotification) {
+class AppDelegate: NSObject, NSApplicationDelegate
+{
+  func applicationDidFinishLaunching(aNotification: NSNotification)
+  {
     // Insert code here to initialize your application
+    checkFirstLaunch()
   }
 
-  func applicationWillTerminate(aNotification: NSNotification) {
+  func applicationWillTerminate(aNotification: NSNotification)
+  {
     // Insert code here to tear down your application
+    userDefaults.synchronize()
   }
-
-
+  
+  func checkFirstLaunch()
+  {
+    if userDefaults.boolForKey("hasLaunched")
+    {
+      print("Launched before")
+    }
+    else
+    {
+      print("Launching for the first time...")
+      userDefaults.setObject("", forKey: "login")
+      userDefaults.setBool(false, forKey: "rememberMe")
+      userDefaults.setBool(true, forKey: "hasLaunched")
+      userDefaults.synchronize()
+    }
+  }
 }
 

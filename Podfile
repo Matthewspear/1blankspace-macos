@@ -5,6 +5,7 @@ target '1blankspace' do
 
   # Pods for 1blankspace
   pod 'Alamofire', '~> 3.4'
+  pod 'KeychainAccess', '~> 2.3'
 
   target '1blankspaceTests' do
     inherit! :search_paths
