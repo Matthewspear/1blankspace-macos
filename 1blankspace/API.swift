@@ -31,6 +31,11 @@ public struct API
   private static let baseURL = "https://secure.mydigitalspacelive.com/rpc/"
   private static var request: Request?
   
+  public static var isActive: Bool {
+    
+    return request != nil
+  }
+  
   static func login(username: String, password: String, completion: (result: String) -> Void, failure: (error: String) -> Void)
   {
     let url = "\(baseURL)logon/?method=LOGON"

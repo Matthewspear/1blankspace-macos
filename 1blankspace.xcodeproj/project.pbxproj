@@ -19,9 +19,6 @@
 		A3670E761D52B5A3007CFE86 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E751D52B5A3007CFE86 /* PanelViewController.swift */; };
 		A3670E781D52BA56007CFE86 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E771D52BA56007CFE86 /* MainViewController.swift */; };
 		A3670E811D52C111007CFE86 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E801D52C111007CFE86 /* API.swift */; };
-		A3670E831D52C59E007CFE86 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E821D52C59E007CFE86 /* Person.swift */; };
-		A3670E851D52C619007CFE86 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E841D52C619007CFE86 /* Business.swift */; };
-		A3670E871D52C90B007CFE86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E861D52C90B007CFE86 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +50,6 @@
 		A3670E751D52B5A3007CFE86 /* PanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
 		A3670E771D52BA56007CFE86 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A3670E801D52C111007CFE86 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		A3670E821D52C59E007CFE86 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		A3670E841D52C619007CFE86 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
-		A3670E861D52C90B007CFE86 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F208434BF1A918B39870FF1F /* Pods-1blankspace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspace/Pods-1blankspace.debug.xcconfig"; sourceTree = "<group>"; };
 		FB7C3B88D0B0CBABE8636683 /* Pods-1blankspaceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspaceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspaceTests/Pods-1blankspaceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,9 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				A3670E801D52C111007CFE86 /* API.swift */,
-				A3670E821D52C59E007CFE86 /* Person.swift */,
-				A3670E841D52C619007CFE86 /* Business.swift */,
-				A3670E861D52C90B007CFE86 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -378,11 +369,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3670E831D52C59E007CFE86 /* Person.swift in Sources */,
-				A3670E851D52C619007CFE86 /* Business.swift in Sources */,
 				A3670E741D52B2F0007CFE86 /* LoginViewController.swift in Sources */,
 				A3670E521D52A485007CFE86 /* AppDelegate.swift in Sources */,
-				A3670E871D52C90B007CFE86 /* User.swift in Sources */,
 				A3670E761D52B5A3007CFE86 /* PanelViewController.swift in Sources */,
 				A34060531D5D3D460070E252 /* Utilities.swift in Sources */,
 				A3670E811D52C111007CFE86 /* API.swift in Sources */,

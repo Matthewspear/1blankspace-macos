@@ -50,20 +50,19 @@ class LoginViewController: NSViewController
   
   func loginInUser()
   {
-    print("\(username) - \(password)")
-    
     API.login(username, password: password, completion: { result in
       
-      print(result)
       self.sid = result
-      
       self.enableView()
       self.progressIndicator.stopAnimation(self)
+      self.performSegueWithIdentifier("toMainView", sender: self)
+      self.view.window?.close()
       
     }) { error in
       
-      // present error here, using error code
+      // TODO: present error here, using error code - use NSLocalizedDescription
       print(error)
+      self.presentError(NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: -1, userInfo: nil))
       
       self.errorTextField.hidden = false
       
@@ -95,12 +94,12 @@ class LoginViewController: NSViewController
     switch rememberButton.state
     {
     case 0:
-      print("deleting password")
+      // Deleting password
       keychain[username] = nil
       userDefaults.setBool(false, forKey: "rememberMe")
       
     case 1:
-      print("storing password")
+      // Storing password
       keychain[username] = password
       userDefaults.setBool(true, forKey: "rememberMe")
       
@@ -121,10 +120,16 @@ class LoginViewController: NSViewController
   
   @IBAction func cancelAction(sender: NSButton)
   {
-    print("Cancel Pressed")
-    API.Cancel()
-    enableView()
-    progressIndicator.stopAnimation(nil)
+    if API.isActive
+    {
+      API.Cancel()
+      enableView()
+      progressIndicator.stopAnimation(nil)
+    }
+    else
+    {
+      NSApplication.sharedApplication().terminate(self)
+    }
   }
   
   @IBAction func rememberAction(sender: NSButton)
@@ -143,7 +148,7 @@ extension LoginViewController: NSTextFieldDelegate
       progressIndicator.startAnimation(nil)
       disableView()
       updateKeychain()
-     userDefaults.setObject(username, forKey: "username")
+      userDefaults.setObject(username, forKey: "username")
       userDefaults.synchronize()
       return true
     }
