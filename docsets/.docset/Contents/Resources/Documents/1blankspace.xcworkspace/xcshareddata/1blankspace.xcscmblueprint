@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6128C363F45526CFC3A2F6750BDE259E54510738",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6128C363F45526CFC3A2F6750BDE259E54510738" : 0,
+    "11C5E3B52A596F3B42782BEC2D47C0E3102EDAA0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C2600A37-84B2-490B-B077-82305BC33403",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6128C363F45526CFC3A2F6750BDE259E54510738" : "1blankspace-macos\/",
+    "11C5E3B52A596F3B42782BEC2D47C0E3102EDAA0" : "1blankspace-old\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "1blankspace",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "1blankspace.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ibcom\/1blankspace-macosx",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "11C5E3B52A596F3B42782BEC2D47C0E3102EDAA0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Matthewspear\/1blankspace-macos",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6128C363F45526CFC3A2F6750BDE259E54510738"
+    }
+  ]
+}

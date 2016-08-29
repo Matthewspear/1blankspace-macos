@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>API Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/API" class="dashAnchor"></a>
+    <a title="API Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        API Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C11_blankspace11UserSession">UserSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Endpoint.html">Endpoint</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/API.html">API</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V11_blankspace15BusinessContact">BusinessContact</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V11_blankspace5Group">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V11_blankspace15PersonalContact">PersonalContact</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>API</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">API</span></code></pre>
+
+                </div>
+              </div>
+            <p>API with methods for accessing the mydigitalstructure.com platform.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV11_blankspace3API8isActiveSb"></a>
+                    <a name="//apple_ref/swift/Variable/isActive" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV11_blankspace3API8isActiveSb">isActive</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the API is currently active issuing a request</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">isActive</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Login%20Method"></a>
+                <a name="//apple_ref/swift/Section/Login Method" class="dashAnchor"></a>
+                <a href="#/Login%20Method">
+                  <h3 class="section-name">Login Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API5loginFTSS8passwordSS10completionFT6resultSS_T_7failureFT5errorCSo7NSError_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/login(_:password:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API5loginFTSS8passwordSS10completionFT6resultSS_T_7failureFT5errorCSo7NSError_T__T_">login(_:password:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides login to the mydigitalstructure.com platform via the API. Results accessed via both completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>API.login(<q>someuser@email.com</q>, password: <q>theirPassword</q>, completion: { result in</p>
+
+<p>// Handle result here</p>
+
+<p>}) { error in</p>
+
+<p>// Handle error here</p>
+
+<p>}
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">login</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username, password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Login used to access mydigitalstructure.com.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding the session id (sid).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Group%20Method"></a>
+                <a name="//apple_ref/swift/Section/Group Method" class="dashAnchor"></a>
+                <a href="#/Group%20Method">
+                  <h3 class="section-name">Group Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API5groupFTOS_8Endpoint3sidSS10completionFT6resultGSaVS_5Group__T_7failureFT5errorCSo7NSError_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/group(_:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API5groupFTOS_8Endpoint3sidSS10completionFT6resultGSaVS_5Group__T_7failureFT5errorCSo7NSError_T__T_">group(_:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides access to personal and business groups on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>API.group(.Person, sid: <q>000-k-00aaa00aaaa0a00...</q>, completion: { result in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">group</span><span class="p">(</span><span class="nv">endpoint</span><span class="p">:</span> <span class="kt"><a href="../Enums/Endpoint.html">Endpoint</a></span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs.html#/s:V11_blankspace5Group">Group</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selection of either personal or business groups.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Session id provided for access to the API available from logon method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding an array of <code>Group</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Personal%20Contact%20Method"></a>
+                <a name="//apple_ref/swift/Section/Personal Contact Method" class="dashAnchor"></a>
+                <a href="#/Personal%20Contact%20Method">
+                  <h3 class="section-name">Personal Contact Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API8personalFTGSqSS_6searchGSqSS_3sidSS10completionFT6resultGSaVS_15PersonalContact__T_7failureFT5errorCSo7NSError_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/personal(_:search:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API8personalFTGSqSS_6searchGSqSS_3sidSS10completionFT6resultGSaVS_15PersonalContact__T_7failureFT5errorCSo7NSError_T__T_">personal(_:search:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides access to personal contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p>// note can both group and search can be nil if a full list within the Person catagory is required + initialiser</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>let sid = <q>000-k-00aaa00aaaa0a00...</q></p>
+
+<p>API.personal(<q>6978</q>, search: <q>Steve</q>, sid: sid, completion: { result in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">personal</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">search</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs.html#/s:V11_blankspace15PersonalContact">PersonalContact</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>group</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Group id used to restrict result to a specific group</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>search</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Search string to restrict results to a specific search</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding an array of <code>PersonalContact</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Business%20Contact%20Method"></a>
+                <a name="//apple_ref/swift/Section/Business Contact Method" class="dashAnchor"></a>
+                <a href="#/Business%20Contact%20Method">
+                  <h3 class="section-name">Business Contact Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API8businessFTGSqSS_6searchGSqSS_3sidSS10completionFT6resultGSaVS_15BusinessContact__T_7failureFT5errorCSo7NSError_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/business(_:search:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API8businessFTGSqSS_6searchGSqSS_3sidSS10completionFT6resultGSaVS_15BusinessContact__T_7failureFT5errorCSo7NSError_T__T_">business(_:search:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides access to business contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p>// note can both group and search can be nil if a full list within the Person catagory is required + initialiser</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>let sid = <q>000-k-00aaa00aaaa0a00...</q></p>
+
+<p>API.business(<q>6932</q>, search: <q>Rachael</q>, sid: sid, completion: { result in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">business</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">search</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs.html#/s:V11_blankspace15BusinessContact">BusinessContact</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>group</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Group id used to restrict result to a specific group</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>search</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Search string to restrict results to a specific search</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding an array of <code>BusinessContact</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,6 @@
+framework module Pods_1blankspaceTests {
+  umbrella header "Pods-1blankspaceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -211,8 +211,7 @@ public struct API
   /**
    Provides access to personal contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
    
-   
-   // note can both group and search can be nil if a full list within the Person catagory is required + initialiser
+   - Note: Both group and search are optional and can be set to `nil` to return the full list of contacts.
    
    ### Usage Example: ###
    ```
@@ -287,8 +286,7 @@ public struct API
   /**
    Provides access to business contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
    
-   
-   // note can both group and search can be nil if a full list within the Person catagory is required + initialiser
+   - Note: Both group and search are optional and can be set to `nil` to return the full list of contacts.
    
    ### Usage Example: ###
    ```

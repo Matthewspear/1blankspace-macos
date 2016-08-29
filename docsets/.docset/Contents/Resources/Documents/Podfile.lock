@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (3.4.1)
+  - KeychainAccess (2.3.6)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - KeychainAccess (~> 2.3)
+  - SwiftyJSON (~> 2.3)
+
+SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  KeychainAccess: 7f10e2ef998ddf954a64d5d608be08677774684d
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+PODFILE CHECKSUM: dceb1a59b2ad60a76abdf4f85f15a25c2d24b1e1
+
+COCOAPODS: 1.0.0.rc.1
