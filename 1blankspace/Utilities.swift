@@ -8,5 +8,11 @@
 
 import KeychainAccess
 
+// Useful constants
+
 let keychain = Keychain(service: "uk.co.matthewspear.-blankspace")
 let userDefaults = NSUserDefaults.standardUserDefaults()
+
+let bundleIdentifer = NSBundle.mainBundle().bundleIdentifier!
+
+let userSession = UserSession.sharedInstance

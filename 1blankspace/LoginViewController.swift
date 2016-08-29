@@ -20,8 +20,6 @@ class LoginViewController: NSViewController
   @IBOutlet var cancelButton: NSButton!
   @IBOutlet var loginButton: NSButton!
   
-  var sid: String?
-  
   var username: String
   {
     return loginTextField.stringValue
@@ -31,7 +29,7 @@ class LoginViewController: NSViewController
   {
     return passwordTextField.stringValue
   }
-
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -52,7 +50,7 @@ class LoginViewController: NSViewController
   {
     API.login(username, password: password, completion: { result in
       
-      self.sid = result
+      userSession.sid = result
       self.enableView()
       self.progressIndicator.stopAnimation(self)
       self.performSegueWithIdentifier("toMainView", sender: self)
@@ -60,12 +58,8 @@ class LoginViewController: NSViewController
       
     }) { error in
       
-      // TODO: present error here, using error code - use NSLocalizedDescription
-      print(error)
-      self.presentError(NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: -1, userInfo: nil))
-      
+      self.presentError(error)
       self.errorTextField.hidden = false
-      
       self.enableView()
       self.progressIndicator.stopAnimation(self)
     }
@@ -122,7 +116,7 @@ class LoginViewController: NSViewController
   {
     if API.isActive
     {
-      API.Cancel()
+      API.cancel()
       enableView()
       progressIndicator.stopAnimation(nil)
     }
