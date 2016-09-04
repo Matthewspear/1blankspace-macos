@@ -16,6 +16,6 @@ Documentation can be found at [https://matthewspear.github.io/1blankspace-macos]
 API references are available at [http://mydigitalstructure.com/](http://mydigitalstructure.com/).
 
 ## License
-This project is released under the [MIT license](./LICENSE).
+This project is released under the [MIT license](https://github.com/Matthewspear/1blankspace-macos/blob/master/LICENSE).
 
 
