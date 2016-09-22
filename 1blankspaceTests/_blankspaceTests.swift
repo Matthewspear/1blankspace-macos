@@ -69,9 +69,9 @@ class _blankspaceTests: XCTestCase
   /**
    Internal method for setting up test JSON
    */
-  func jsonFromString(string: String) -> JSON?
+  func jsonFromString(_ string: String) -> JSON?
   {
-    guard let data = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) else { return nil }
+    guard let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false) else { return nil }
     return JSON(data: data)
   }
 }

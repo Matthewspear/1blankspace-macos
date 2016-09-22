@@ -11,13 +11,13 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate
 {
-  func applicationDidFinishLaunching(aNotification: NSNotification)
+  func applicationDidFinishLaunching(_ aNotification: Notification)
   {
     // Insert code here to initialize your application
     checkFirstLaunch()
   }
 
-  func applicationWillTerminate(aNotification: NSNotification)
+  func applicationWillTerminate(_ aNotification: Notification)
   {
     // Insert code here to tear down your application
     userDefaults.synchronize()
@@ -25,16 +25,16 @@ class AppDelegate: NSObject, NSApplicationDelegate
   
   func checkFirstLaunch()
   {
-    if userDefaults.boolForKey("hasLaunched")
+    if userDefaults.bool(forKey: "hasLaunched")
     {
       print("Launched before")
     }
     else
     {
       print("Launching for the first time...")
-      userDefaults.setObject("", forKey: "login")
-      userDefaults.setBool(false, forKey: "rememberMe")
-      userDefaults.setBool(true, forKey: "hasLaunched")
+      userDefaults.set("", forKey: "login")
+      userDefaults.set(false, forKey: "rememberMe")
+      userDefaults.set(true, forKey: "hasLaunched")
       userDefaults.synchronize()
     }
   }

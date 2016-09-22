@@ -29,12 +29,12 @@ class PanelViewController: NSViewController
     super.viewDidLoad()
   }
   
-  @IBAction func okAction(sender: NSButton)
+  @IBAction func okAction(_ sender: NSButton)
   {
     print("OK triggered")
   }
   
-  @IBAction func cancelAction(sender: NSButton)
+  @IBAction func cancelAction(_ sender: NSButton)
   {
     print("Cancel triggered")
   }

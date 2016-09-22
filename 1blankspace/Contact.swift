@@ -35,8 +35,8 @@ extension PersonalContact
 {
   init?(json: JSON)
   {
-    guard let id = json["id"].string, firstname = json["firstname"].string, surname = json["surname"].string, email = json["email"].string, mobile = json["mobile"].string,
-      group = json["persongroup"].string else { return nil }
+    guard let id = json["id"].string, let firstname = json["firstname"].string, let surname = json["surname"].string, let email = json["email"].string, let mobile = json["mobile"].string,
+      let group = json["persongroup"].string else { return nil }
     self.init(id: id,firstname: firstname, surname: surname, email: email, mobile: mobile, group: group)
   }
 }
@@ -67,8 +67,8 @@ extension BusinessContact
 {
   init?(json: JSON)
   {
-    guard let id = json["id"].string, legalname = json["legalname"].string, tradename = json["tradename"].string, email = json["email"].string, phonenumber = json["phonenumber"].string,
-      group = json["businessgroup"].string else { return nil }
+    guard let id = json["id"].string, let legalname = json["legalname"].string, let tradename = json["tradename"].string, let email = json["email"].string, let phonenumber = json["phonenumber"].string,
+      let group = json["businessgroup"].string else { return nil }
     self.init(id: id, tradename: tradename, legalname: legalname, email: email, phonenumber: phonenumber, group: group)
   }
 }

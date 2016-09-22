@@ -37,11 +37,11 @@ class LoginViewController: NSViewController
     loginTextField.delegate = self
     passwordTextField.delegate = self
     
-    rememberButton.state = userDefaults.boolForKey("rememberMe") ? 1 : 0
+    rememberButton.state = userDefaults.bool(forKey: "rememberMe") ? 1 : 0
     
-    if userDefaults.boolForKey("rememberMe")
+    if userDefaults.bool(forKey: "rememberMe")
     {
-      loginTextField.stringValue = userDefaults.stringForKey("username") ?? ""
+      loginTextField.stringValue = userDefaults.string(forKey: "username") ?? ""
       passwordTextField.stringValue = keychain[username] ?? ""
     }
   }
@@ -53,13 +53,13 @@ class LoginViewController: NSViewController
       userSession.sid = result
       self.enableView()
       self.progressIndicator.stopAnimation(self)
-      self.performSegueWithIdentifier("toMainView", sender: self)
+      self.performSegue(withIdentifier: "toMainView", sender: self)
       self.view.window?.close()
       
     }) { error in
       
       self.presentError(error)
-      self.errorTextField.hidden = false
+      self.errorTextField.isHidden = false
       self.enableView()
       self.progressIndicator.stopAnimation(self)
     }
@@ -67,20 +67,20 @@ class LoginViewController: NSViewController
   
   func disableView()
   {
-    loginTextField.enabled = false
-    passwordTextField.enabled = false
-    rememberButton.enabled = false
-    loginButton.enabled = false
+    loginTextField.isEnabled = false
+    passwordTextField.isEnabled = false
+    rememberButton.isEnabled = false
+    loginButton.isEnabled = false
     
-    errorTextField.hidden = true
+    errorTextField.isHidden = true
   }
   
   func enableView()
   {
-    loginTextField.enabled = true
-    passwordTextField.enabled = true
-    rememberButton.enabled = true
-    loginButton.enabled = true
+    loginTextField.isEnabled = true
+    passwordTextField.isEnabled = true
+    rememberButton.isEnabled = true
+    loginButton.isEnabled = true
   }
   
   func updateKeychain()
@@ -90,29 +90,29 @@ class LoginViewController: NSViewController
     case 0:
       // Deleting password
       keychain[username] = nil
-      userDefaults.setBool(false, forKey: "rememberMe")
+      userDefaults.set(false, forKey: "rememberMe")
       
     case 1:
       // Storing password
       keychain[username] = password
-      userDefaults.setBool(true, forKey: "rememberMe")
+      userDefaults.set(true, forKey: "rememberMe")
       
     default: break
     }
   }
   
-  @IBAction func loginAction(sender: NSButton)
+  @IBAction func loginAction(_ sender: NSButton)
   {
     loginInUser()
     progressIndicator.startAnimation(nil)
     disableView()
     
     updateKeychain()
-    userDefaults.setObject(username, forKey: "username")
+    userDefaults.set(username, forKey: "username")
     userDefaults.synchronize()
   }
   
-  @IBAction func cancelAction(sender: NSButton)
+  @IBAction func cancelAction(_ sender: NSButton)
   {
     if API.isActive
     {
@@ -122,11 +122,11 @@ class LoginViewController: NSViewController
     }
     else
     {
-      NSApplication.sharedApplication().terminate(self)
+      NSApplication.shared().terminate(self)
     }
   }
   
-  @IBAction func rememberAction(sender: NSButton)
+  @IBAction func rememberAction(_ sender: NSButton)
   {
     updateKeychain()
   }
@@ -134,7 +134,7 @@ class LoginViewController: NSViewController
 
 extension LoginViewController: NSTextFieldDelegate
 {
-  func control(control: NSControl, textView: NSTextView, doCommandBySelector commandSelector: Selector) -> Bool
+  func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool
   {
     if commandSelector == #selector(self.insertNewline)
     {
@@ -142,7 +142,7 @@ extension LoginViewController: NSTextFieldDelegate
       progressIndicator.startAnimation(nil)
       disableView()
       updateKeychain()
-      userDefaults.setObject(username, forKey: "username")
+      userDefaults.set(username, forKey: "username")
       userDefaults.synchronize()
       return true
     }

@@ -1,12 +1,12 @@
-platform :osx, '10.9'
+platform :osx, '10.11'
 
 target '1blankspace' do
   use_frameworks!
 
   # Pods for 1blankspace
-  pod 'Alamofire', '~> 3.4'
-  pod 'SwiftyJSON', '~> 2.3'
-  pod 'KeychainAccess', '~> 2.3'
+  pod 'Alamofire', '~> 4.0'
+  pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'
+  pod 'KeychainAccess', '~> 3.0'
 
   target '1blankspaceTests' do
     inherit! :search_paths

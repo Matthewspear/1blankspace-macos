@@ -1,18 +1,28 @@
 PODS:
-  - Alamofire (3.4.1)
-  - KeychainAccess (2.3.6)
+  - Alamofire (4.0.0)
+  - KeychainAccess (3.0.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
-  - KeychainAccess (~> 2.3)
-  - SwiftyJSON (~> 2.3)
+  - Alamofire (~> 4.0)
+  - KeychainAccess (~> 3.0)
+  - SwiftyJSON (from `https://github.com/BaiduHiDeviOS/SwiftyJSON.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :branch: swift3
+    :git: https://github.com/BaiduHiDeviOS/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: de5dc3b1b421805769590d331178551bbb0e5733
+    :git: https://github.com/BaiduHiDeviOS/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  KeychainAccess: 7f10e2ef998ddf954a64d5d608be08677774684d
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  KeychainAccess: 412bf2650d9aebfc8135a58103b90ec38caad7f8
+  SwiftyJSON: 6118fb49d7519c4d31a0c1f3d5af936e9047b556
 
-PODFILE CHECKSUM: dceb1a59b2ad60a76abdf4f85f15a25c2d24b1e1
+PODFILE CHECKSUM: 4ba623f4884a99c23cf5e00cb4f807e4de5ea292
 
-COCOAPODS: 1.0.0.rc.1
+COCOAPODS: 1.1.0.rc.2

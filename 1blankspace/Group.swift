@@ -27,7 +27,7 @@ extension Group
 {
   init?(json: JSON)
   {
-    guard let title = json["title"].string, id = json["id"].string else { return nil }
+    guard let title = json["title"].string, let id = json["id"].string else { return nil }
     self.init(title: title, id: id)
   }
 }

@@ -27,13 +27,13 @@ class MainViewController: NSViewController
     super.viewDidLoad()
     print("view did load")
     
-    endpointTableView.setDelegate(self)
-    groupTableView.setDelegate(self)
-    dataTableView.setDelegate(self)
+    endpointTableView.delegate = self
+    groupTableView.delegate = self
+    dataTableView.delegate = self
     
-    endpointTableView.setDataSource(self)
-    groupTableView.setDataSource(self)
-    dataTableView.setDataSource(self)
+    endpointTableView.dataSource = self
+    groupTableView.dataSource = self
+    dataTableView.dataSource = self
     
     //    NSImage(named: NSImageNameUser)
     //    NSImage(named: NSImageNameUserGroup)
@@ -68,27 +68,27 @@ class MainViewController: NSViewController
     }
   }
   
-  @IBAction func addAction(sender: NSButton)
+  @IBAction func addAction(_ sender: NSButton)
   {
     print("Add triggered")
   }
   
-  @IBAction func editAction(sender: NSButton)
+  @IBAction func editAction(_ sender: NSButton)
   {
     print("Edit triggered")
   }
   
-  @IBAction func removeAction(sender: NSButton)
+  @IBAction func removeAction(_ sender: NSButton)
   {
     print("Remove triggered")
   }
   
-  @IBAction func selectEndpoint(sender: NSTableView)
+  @IBAction func selectEndpoint(_ sender: NSTableView)
   {
     print("Select Endpoint triggered")
   }
   
-  @IBAction func selectGroup(sender: NSTableView)
+  @IBAction func selectGroup(_ sender: NSTableView)
   {
     print("Select Group triggered")
   }
@@ -96,7 +96,7 @@ class MainViewController: NSViewController
 
 extension MainViewController: NSTableViewDataSource
 {
-  func numberOfRowsInTableView(tableView: NSTableView) -> Int
+  func numberOfRows(in tableView: NSTableView) -> Int
   {
     if let id = tableView.identifier
     {
@@ -117,7 +117,7 @@ extension MainViewController: NSTableViewDataSource
 
 extension MainViewController: NSTableViewDelegate
 {
-  func tableView(tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView?
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView?
   {
     return NSTableRowView()
   }

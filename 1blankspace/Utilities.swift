@@ -10,9 +10,9 @@ import KeychainAccess
 
 // Useful constants
 
+let bundleIdentifer = Bundle.main.bundleIdentifier!
+
 let keychain = Keychain(service: "uk.co.matthewspear.-blankspace")
-let userDefaults = NSUserDefaults.standardUserDefaults()
 
-let bundleIdentifer = NSBundle.mainBundle().bundleIdentifier!
-
+let userDefaults = UserDefaults.standard
 let userSession = UserSession.sharedInstance
