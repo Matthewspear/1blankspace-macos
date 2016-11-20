@@ -14,7 +14,7 @@ import SwiftyJSON
 public enum Endpoint
 {
     /// Access to personal group / contacts.
-    case person
+    case personal
     
     /// Access to business group / contacts.
     case business
@@ -28,7 +28,6 @@ public struct API
     
     /// If the API is currently active issuing a request
     public static var isActive: Bool {
-        
         return request != nil
     }
     
@@ -52,60 +51,50 @@ public struct API
      
      - parameter username, password:   Login used to access mydigitalstructure.com.
      - parameter completion:           Closure called when method succeeds holding the session id (sid).
-     - parameter failure:              Closure called when method fails holding the error.
+     - parameter failure:              Closure called when method fails, holding the error.
      */
     
     public static func login(_ username: String, password: String, completion: @escaping (String) -> Void, failure: @escaping (NSError) -> Void)
     {
         let url = "\(baseURL)logon/?method=LOGON"
         
-        let params: [String : AnyObject] = [
-            "rf": "JSON" as AnyObject,
-            "Logon": "\(username)" as AnyObject,
-            "Password": "\(password)" as AnyObject
+        let params: [String : Any] = [
+            "rf": "JSON",
+            "Logon": "\(username)",
+            "Password": "\(password)"
         ]
         
         let encoding = JSONEncoding.default
         
         request = Alamofire.request(url, method: .post, parameters: params, encoding: encoding, headers: nil).validate().responseJSON { response in
             
-            self.processLogin(response, completion: completion, failure: failure)
+            switch response.result
+            {
+            case .success(let value):
+                processLogin(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
         }
-        
-        //    request = Alamofire.request(.POST, url, parameters: params, encoding: encoding, headers: nil).validate().responseJSON { response in
-        //
-        //      self.processLogin(response, completion: completion, failure: failure)
-        //    }
     }
     
     /**
      Internal method for parsing the login response, extracted to allowing for easier testing.
      */
-    internal static func processLogin(_ response: DataResponse<Any>, completion: (String) -> Void, failure: (NSError) -> Void)
+    internal static func processLogin(value: Any, completion: (String) -> Void, failure: (NSError) -> Void)
     {
-        switch response.result
+        let json = JSON(value)
+        
+        if let sid = json["sid"].string
         {
-        case .success:
-            
-            let json = JSON(response.result.value!)
-            
-            if let sid = json["sid"].string
-            {
-                completion(sid)
-            }
-            else
-            {
-                // Corrupt, malformed or nil JSON
-                let userInfo: [AnyHashable: Any] = [
-                    NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
-                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
-                let error = NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
-                print(error)
-                failure(error)
-            }
-            
-        case .failure(let error):
-            failure(error as NSError)
+            completion(sid)
+        }
+        else
+        {
+            // Corrupt, malformed or nil JSON
+            let error = generateError()
+            failure(error)
         }
     }
     
@@ -117,7 +106,7 @@ public struct API
      
      ### Usage Example: ###
      ```
-     API.group(.Person, sid: "000-k-00aaa00aaaa0a00...", completion: { result in
+     API.group(.person, sid: "000-k-00aaa00aaaa0a00...", completion: { result in
      
      // Handle result here
      
@@ -140,7 +129,7 @@ public struct API
         
         switch endpoint
         {
-        case .person: method = "SETUP_CONTACT_PERSON_GROUP_SEARCH"
+        case .personal: method = "SETUP_CONTACT_PERSON_GROUP_SEARCH"
         case .business: method = "SETUP_CONTACT_BUSINESS_GROUP_SEARCH"
         }
         
@@ -159,53 +148,51 @@ public struct API
         
         request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
             
-            self.processGroup(response: response, completion: completion, failure: failure)
-            
+            switch response.result
+            {
+            case .success(let value):
+                processGroup(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
         })
     }
     
     /**
      Internal method for parsing the group response, extracted to allowing for easier testing.
      */
-    internal static func processGroup(response: DataResponse<Any>, completion: ([Group]) -> Void, failure: (NSError) -> Void)
+    internal static func processGroup(value: Any, completion: ([Group]) -> Void, failure: (NSError) -> Void)
     {
-        switch response.result
+        let json = JSON(value)
+        
+        if let data = json["data"].dictionary, let rows = data["rows"]?.array
         {
-        case .success:
+            var groups: [Group] = []
             
-            let json = JSON(response.result.value!)
-            
-            if let data = json["data"].dictionary, let rows = data["rows"]?.array
+            for json in rows
             {
-                var groups: [Group] = []
-                
-                for json in rows
+                if let group = Group(json: json)
                 {
-                    if let group = Group(json: json)
-                    {
-                        groups.append(group)
-                    }
-                    else
-                    {
-                        print("Error creating a Group - Malformed JSON: \(json)")
-                    }
+                    groups.append(group)
                 }
-                completion(groups)
+                else
+                {
+                    print("Error creating a Group - Malformed JSON: \(json)")
+                }
             }
-            else
-            {
-                // Corrupt, malformed or nil JSON
-                let userInfo: [String: Any] = [
-                    NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
-                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
-                let error = NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
-                print(error)
-                
-                failure(error)
-            }
+            completion(groups)
+        }
+        else
+        {
+            // Corrupt, malformed or nil JSON
+            let userInfo: [String: Any] = [
+                NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
+                NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
+            let error = NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
+            print(error)
             
-        case .failure(let error):
-            failure(error as NSError)
+            failure(error)
         }
     }
     
@@ -281,7 +268,14 @@ public struct API
         
         request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
             
-            self.processContact(response, completion: completion, failure: failure)
+            switch response.result
+            {
+            case .success(let value):
+                processContact(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
         })
     }
     
@@ -318,23 +312,23 @@ public struct API
     {
         let method = "CONTACT_BUSINESS_SEARCH"
         let url = "\(baseURL)contact/?method=\(method)"
-        var filters: [[String : AnyObject]] = []
+        var filters: [[String : Any]] = []
         
         if let group = group
         {
             filters.append([
-                "name": "BusinessGroup" as AnyObject,
-                "comparison": "TEXT_IS_LIKE" as AnyObject,
-                "value1": group as AnyObject
+                "name": "BusinessGroup",
+                "comparison": "TEXT_IS_LIKE",
+                "value1": group
                 ])
         }
         
         if let search = search
         {
             filters.append([
-                "name": "quicksearch" as AnyObject,
-                "comparison": "TEXT_IS_LIKE" as AnyObject,
-                "value1": search as AnyObject
+                "name": "quicksearch",
+                "comparison": "TEXT_IS_LIKE",
+                "value1": search
                 ])
         }
         
@@ -356,64 +350,68 @@ public struct API
         
         request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON { response in
             
-            self.processContact(response, completion: completion, failure: failure)
+            switch response.result
+            {
+            case .success(let value):
+                processContact(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
         }
     }
-    
     
     /**
      A Generic internal method for parsing the contact response, extracted to allowing for easier testing.
      */
-    internal static func processContact<T>(_ response: DataResponse<Any>, completion: ([T]) -> Void, failure: (NSError) -> Void)
+    internal static func processContact<T>(value: Any, completion: ([T]) -> Void, failure: (NSError) -> Void)
     {
-        switch response.result
+        let json = JSON(value)
+        
+        if let data = json["data"].dictionary, let rows = data["rows"]?.array
         {
-        case .success:
+            var contacts: [T] = []
             
-            let json = JSON(response.result.value!)
-            
-            if let data = json["data"].dictionary, let rows = data["rows"]?.array
+            for json in rows
             {
-                var contacts: [T] = []
-                
-                for json in rows
+                if let contact = PersonalContact(json: json) as? T
                 {
-                    if let contact = PersonalContact(json: json) as? T
-                    {
-                        contacts.append(contact)
-                    }
-                    else if let contact = BusinessContact(json: json) as? T
-                    {
-                        contacts.append(contact)
-                    }
-                    else
-                    {
-                        print("Error creating a Contact - Malformed JSON: \(json)")
-                    }
+                    contacts.append(contact)
                 }
-                completion(contacts)
+                else if let contact = BusinessContact(json: json) as? T
+                {
+                    contacts.append(contact)
+                }
+                else
+                {
+                    print("Error creating a Contact - Malformed JSON: \(json)")
+                    // Corrupt, malformed or nil JSON
+                    let error = generateError()
+                    failure(error)
+                }
             }
-            else
-            {
-                // Corrupt, malformed or nil JSON
-                let userInfo: [AnyHashable: Any] = [
-                    NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
-                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
-                let error = NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
-                print(error)
-                failure(error)
-            }
-            
-        case .failure(let error):
-            failure(error as NSError)
+            completion(contacts)
+        }
+        else
+        {
+            let error: NSError = generateError()
+            failure(error)
         }
     }
     
-    
     // MARK: Edit Method
     
-    
     // MARK: Cancel Method
+    
+    // MARK: JSON Error
+    
+    private static func generateError() -> NSError
+    {
+        let userInfo: [AnyHashable: Any] = [
+            NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
+            NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
+        return NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
+    }
     
     /**
      Cancel current API request
