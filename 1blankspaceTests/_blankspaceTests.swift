@@ -13,65 +13,105 @@ import SwiftyJSON
 
 class _blankspaceTests: XCTestCase
 {
-  let login = ""
-  let password = ""
-  
-  override func setUp()
-  {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
-  
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
-  
-  func testAPILoginRoundTrip()
-  {
-    API.login(login, password: password, completion: { result in
-      
-      }) { error in
-        XCTFail("Could not login")
+    let failure: (NSError) -> () = { _ in XCTFail() }
+    
+    
+    // MARK: Support Functions
+    
+    func loadJSON(forResource filename: String, withExtension ext: String = "json") -> Any?
+    {
+        let bundle = Bundle(for: type(of: self))
+        if let fileURL = bundle.url(forResource: filename, withExtension: ext)
+        {
+            do {
+                let jsonData = NSData(contentsOf: fileURL)
+                let value = try JSONSerialization.jsonObject(with: jsonData as! Data, options: .allowFragments)
+                
+                return value
+            }
+            catch let error as NSError
+            {
+                print(error)
+            }
+        }
+        return nil
     }
-  }
-  
-  func testAPILoginLogic()
-  {
-    // Using process login add tests to trigger each case including success, incorrect credentials, malformed json and failure
     
-//    let input = jsonFromString("")
+    // MARK: API Tests
     
+    func testLogin()
+    {
+        guard let value = loadJSON(forResource: "login") else { XCTFail(); return }
+        
+        API.processLogin(value: value, completion: { sid in
+            
+            XCTAssertEqual(sid, "345389155-k-8cb1ceaaa321fb257cb61ed659c55cc7")
+            
+        }, failure: failure)
+    }
     
-//    let result = Result<Value, Error>()
-//    
-//    let response = Response(request: nil, response: nil, data: nil, result: result)
-//    
-//    
-//    // Test parsing successful result
-//    API.processLogin(response, completion: { result in
-//      
-//      
-//      
-//      }, failure: nil)
-//    
-//    // Test parsing failed result
-//    API.processLogin(response, completion: nil) { error in
-//      
-//      
-//    }
-  }
-  
-  
-  // test on live server (round trip test)
-  // test using API logic (after the response)
-  
-  /**
-   Internal method for setting up test JSON
-   */
-  func jsonFromString(_ string: String) -> JSON?
-  {
-    guard let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false) else { return nil }
-    return JSON(data: data)
-  }
+    func testPersonalGroup()
+    {
+        guard let value = loadJSON(forResource: "personalGroups") else { XCTFail(); return }
+        
+        let customer = Group(title: "Customer", id: "6977")
+        let supplier = Group(title: "Supplier", id: "6978")
+        let friends = Group(title: "Friends", id: "7137")
+        
+        API.processGroup(value: value, completion: { groups in
+            
+            XCTAssertTrue(groups.contains { $0 == customer })
+            XCTAssertTrue(groups.contains { $0 == supplier })
+            XCTAssertTrue(groups.contains { $0 == friends })
+            XCTAssertEqual(groups.count, 3)
+            
+        }, failure: failure)
+    }
+    
+    func testBusinessGroup()
+    {
+        guard let value = loadJSON(forResource: "businessGroups") else { XCTFail(); return }
+        
+        let financier = Group(title: "Financier", id: "3394")
+        
+        API.processGroup(value: value, completion: { groups in
+            
+            XCTAssertTrue(groups.contains { $0 == financier })
+            XCTAssertEqual(groups.count, 1)
+            
+        }, failure: failure)
+    }
+    
+    func testPersonalContacts()
+    {
+        guard let value = loadJSON(forResource: "personalContacts") else { XCTFail(); return }
+        
+        let johnSmith = PersonalContact(id: "1000446786", firstname: "John", surname: "Smith", email: "test@email.com", mobile: "0410 123 456", group: "")
+        
+        let completion: ([PersonalContact]) -> Void = { contacts in
+            
+            XCTAssertTrue(contacts.contains { $0 == johnSmith })
+            XCTAssertEqual(contacts.count, 5)
+        }
+        
+        API.processContact(value: value, completion: completion, failure: failure )
+    }
+    
+    func testBusinessContacts()
+    {
+        guard let value = loadJSON(forResource: "businessContacts") else { XCTFail(); return }
+        
+        let testCompany = BusinessContact(id: "1258093", tradename: "onDemand Testing", legalname: "Blankspace Corp", email: "test@company.co", phonenumber: "02 1234 6749", group: "3394")
+        
+        let completion: ([BusinessContact]) -> Void = { contacts in
+            
+            XCTAssertTrue(contacts.contains { $0 == testCompany })
+            XCTAssertEqual(contacts.count, 6)
+        }
+        
+        API.processContact(value: value, completion: completion, failure: failure )
+    }
 }
+
+
+

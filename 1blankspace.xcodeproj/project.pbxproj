@@ -26,6 +26,12 @@
 		A378B9861D748DD800FD18DB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378B9851D748DD800FD18DB /* Contact.swift */; };
 		A378B9881D74914500FD18DB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378B9851D748DD800FD18DB /* Contact.swift */; };
 		A378B9891D74C01F00FD18DB /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378B9821D74711000FD18DB /* UserSession.swift */; };
+		A3E6A7431DE0FEA500A2EBF0 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = A3E6A7421DE0FEA500A2EBF0 /* login.json */; };
+		A3E6A7481DE12B8B00A2EBF0 /* businessContacts.json in Resources */ = {isa = PBXBuildFile; fileRef = A3E6A7441DE12B8B00A2EBF0 /* businessContacts.json */; };
+		A3E6A7491DE12B8B00A2EBF0 /* businessGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = A3E6A7451DE12B8B00A2EBF0 /* businessGroups.json */; };
+		A3E6A74A1DE12B8B00A2EBF0 /* personalContacts.json in Resources */ = {isa = PBXBuildFile; fileRef = A3E6A7461DE12B8B00A2EBF0 /* personalContacts.json */; };
+		A3E6A74B1DE12B8B00A2EBF0 /* personalGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = A3E6A7471DE12B8B00A2EBF0 /* personalGroups.json */; };
+		A3E6A74D1DE13AF400A2EBF0 /* Utillities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E6A74C1DE13AF400A2EBF0 /* Utillities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +66,12 @@
 		A3670E801D52C111007CFE86 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		A378B9821D74711000FD18DB /* UserSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		A378B9851D748DD800FD18DB /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		A3E6A7421DE0FEA500A2EBF0 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		A3E6A7441DE12B8B00A2EBF0 /* businessContacts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = businessContacts.json; sourceTree = "<group>"; };
+		A3E6A7451DE12B8B00A2EBF0 /* businessGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = businessGroups.json; sourceTree = "<group>"; };
+		A3E6A7461DE12B8B00A2EBF0 /* personalContacts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = personalContacts.json; sourceTree = "<group>"; };
+		A3E6A7471DE12B8B00A2EBF0 /* personalGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = personalGroups.json; sourceTree = "<group>"; };
+		A3E6A74C1DE13AF400A2EBF0 /* Utillities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utillities.swift; sourceTree = "<group>"; };
 		F208434BF1A918B39870FF1F /* Pods-1blankspace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspace/Pods-1blankspace.debug.xcconfig"; sourceTree = "<group>"; };
 		FB7C3B88D0B0CBABE8636683 /* Pods-1blankspaceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspaceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspaceTests/Pods-1blankspaceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				A3670E631D52A485007CFE86 /* _blankspaceTests.swift */,
+				A3E6A74C1DE13AF400A2EBF0 /* Utillities.swift */,
+				A3E6A7421DE0FEA500A2EBF0 /* login.json */,
+				A3E6A7471DE12B8B00A2EBF0 /* personalGroups.json */,
+				A3E6A7451DE12B8B00A2EBF0 /* businessGroups.json */,
+				A3E6A7461DE12B8B00A2EBF0 /* personalContacts.json */,
+				A3E6A7441DE12B8B00A2EBF0 /* businessContacts.json */,
 				A3670E651D52A485007CFE86 /* Info.plist */,
 			);
 			path = 1blankspaceTests;
@@ -228,13 +246,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Matthew Spear";
 				TargetAttributes = {
 					A3670E4D1D52A485007CFE86 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JHN8AW68Y3;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -281,6 +300,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3E6A74A1DE12B8B00A2EBF0 /* personalContacts.json in Resources */,
+				A3E6A7481DE12B8B00A2EBF0 /* businessContacts.json in Resources */,
+				A3E6A7491DE12B8B00A2EBF0 /* businessGroups.json in Resources */,
+				A3E6A7431DE0FEA500A2EBF0 /* login.json in Resources */,
+				A3E6A74B1DE12B8B00A2EBF0 /* personalGroups.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +427,7 @@
 				A359C4121D72ED68007C5FCA /* Group.swift in Sources */,
 				A34060511D5D30DB0070E252 /* API.swift in Sources */,
 				A378B9881D74914500FD18DB /* Contact.swift in Sources */,
+				A3E6A74D1DE13AF400A2EBF0 /* Utillities.swift in Sources */,
 				A378B9891D74C01F00FD18DB /* UserSession.swift in Sources */,
 				A378B9841D74849B00FD18DB /* Utilities.swift in Sources */,
 				A3670E641D52A485007CFE86 /* _blankspaceTests.swift in Sources */,
@@ -445,8 +470,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -490,8 +517,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -510,6 +539,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -517,11 +547,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F208434BF1A918B39870FF1F /* Pods-1blankspace.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 1blankspace/1blankspace.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JHN8AW68Y3;
 				INFOPLIST_FILE = 1blankspace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -536,11 +568,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 35FD376A6B025080F2A24864 /* Pods-1blankspace.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 1blankspace/1blankspace.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JHN8AW68Y3;
 				INFOPLIST_FILE = 1blankspace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;

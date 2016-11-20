@@ -1,0 +1,65 @@
+{
+  "status": "OK",
+  "notes": "RETURNED",
+  "instance": "005",
+  "xhtmlcontext": "",
+  "data": {
+    "rows": [
+      {
+        "tradename": "onDemand Testing",
+        "legalname": "Blankspace Corp",
+        "email": "test@company.co",
+        "phonenumber": "02 1234 6749",
+        "businessgroup": "3394",
+        "id": "1258093"
+      },
+      {
+        "tradename": "ABC Pty Ltd",
+        "legalname": "",
+        "email": "test@email.com",
+        "phonenumber": "",
+        "businessgroup": "",
+        "id": "1274964"
+      },
+      {
+        "tradename": "DEF Pty Ltd",
+        "legalname": "",
+        "email": "jane.cooper@email.com",
+        "phonenumber": "",
+        "businessgroup": "",
+        "id": "1274965"
+      },
+      {
+        "tradename": "VenoMKO",
+        "legalname": "VenoMKO",
+        "email": "some@email",
+        "phonenumber": "9112",
+        "businessgroup": "",
+        "id": "1315327"
+      },
+      {
+        "tradename": "Superannuation Fund (Default)",
+        "legalname": "Superannuation Fund (Default)",
+        "email": "",
+        "phonenumber": "",
+        "businessgroup": "",
+        "id": "1316778"
+      },
+      {
+        "tradename": "Tax Office",
+        "legalname": "Tax Office",
+        "email": "",
+        "phonenumber": "",
+        "businessgroup": "",
+        "id": "1316779"
+      }
+    ]
+  },
+  "startrow": "0",
+  "rows": "100",
+  "morerows": "false",
+  "moreid": "126653611",
+  "summary": {
+    "contactcount": "6"
+  }
+}
