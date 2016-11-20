@@ -5,7 +5,7 @@ target '1blankspace' do
 
   # Pods for 1blankspace
   pod 'Alamofire', '~> 4.0'
-  pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'
+  pod 'SwiftyJSON', '~> 3.0'
   pod 'KeychainAccess', '~> 3.0'
 
   target '1blankspaceTests' do

@@ -526,7 +526,7 @@ public final class Keychain {
         case errSecItemNotFound:
             return nil
         default:
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -554,7 +554,7 @@ public final class Keychain {
         case errSecItemNotFound:
             return handler(nil)
         default:
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -590,8 +590,7 @@ public final class Keychain {
             var query = options.query()
             query[AttributeAccount] = key
 
-//            var (attributes, error) = options.attributes(key: nil, value: value)
-            var (attributes, error) = options.attributes(nil, value: value)
+            var (attributes, error) = options.attributes(key: nil, value: value)
             if let error = error {
                 print(error.localizedDescription)
                 throw error
@@ -612,12 +611,11 @@ public final class Keychain {
             #else
             status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
             if status != errSecSuccess {
-                throw securityError(status)
+                throw securityError(status: status)
             }
             #endif
         case errSecItemNotFound:
-//            var (attributes, error) = options.attributes(key: key, value: value)
-            var (attributes, error) = options.attributes(nil, value: value)
+            var (attributes, error) = options.attributes(key: key, value: value)
             if let error = error {
                 print(error.localizedDescription)
                 throw error
@@ -627,10 +625,10 @@ public final class Keychain {
 
             status = SecItemAdd(attributes as CFDictionary, nil)
             if status != errSecSuccess {
-                throw securityError(status)
+                throw securityError(status: status)
             }
         default:
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -694,7 +692,7 @@ public final class Keychain {
 
         let status = SecItemDelete(query as CFDictionary)
         if status != errSecSuccess && status != errSecItemNotFound {
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -706,7 +704,7 @@ public final class Keychain {
 
         let status = SecItemDelete(query as CFDictionary)
         if status != errSecSuccess && status != errSecItemNotFound {
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -723,7 +721,7 @@ public final class Keychain {
         case errSecItemNotFound:
             return false
         default:
-            throw securityError(status)
+            throw securityError(status: status)
         }
     }
 
@@ -742,7 +740,7 @@ public final class Keychain {
         switch status {
         case errSecSuccess:
             if let items = result as? [[String: Any]] {
-                return prettify(itemClass, items: items).map {
+                return prettify(itemClass: itemClass, items: items).map {
                     switch itemClass {
                     case .genericPassword:
                         return (($0["service"] ?? "") as! String, ($0["key"] ?? "") as! String)
@@ -756,12 +754,12 @@ public final class Keychain {
         default: ()
         }
 
-        securityError(status)
+        securityError(status: status)
         return []
     }
 
     public func allKeys() -> [String] {
-        return type(of: self).prettify(itemClass, items: items()).map { $0["key"] as! String }
+        return type(of: self).prettify(itemClass: itemClass, items: items()).map { $0["key"] as! String }
     }
 
     public class func allItems(_ itemClass: ItemClass) -> [[String: Any]] {
@@ -779,19 +777,19 @@ public final class Keychain {
         switch status {
         case errSecSuccess:
             if let items = result as? [[String: Any]] {
-                return prettify(itemClass, items: items)
+                return prettify(itemClass: itemClass, items: items)
             }
         case errSecItemNotFound:
             return []
         default: ()
         }
 
-        securityError(status)
+        securityError(status: status)
         return []
     }
 
     public func allItems() -> [[String: Any]] {
-        return type(of: self).prettify(itemClass, items: items())
+        return type(of: self).prettify(itemClass: itemClass, items: items())
     }
 
     #if os(iOS)
@@ -838,8 +836,8 @@ public final class Keychain {
 
     #if os(iOS)
     @available(iOS 8.0, *)
-    public func setSharedPassword(_ password: String, account: String, completion: (_ error: Error?) -> () = { e -> () in }) {
-        setSharedPassword((password as String?)!, account: account, completion: completion)
+    public func setSharedPassword(_ password: String, account: String, completion: @escaping (_ error: Error?) -> () = { e -> () in }) {
+        setSharedPassword(password as String?, account: account, completion: completion)
     }
     #endif
 
@@ -958,11 +956,11 @@ public final class Keychain {
         default: ()
         }
 
-        securityError(status)
+        securityError(status: status)
         return []
     }
 
-    fileprivate class func prettify(_ itemClass: ItemClass, items: [[String: Any]]) -> [[String: Any]] {
+    fileprivate class func prettify(itemClass: ItemClass, items: [[String: Any]]) -> [[String: Any]] {
         let items = items.map { attributes -> [String: Any] in
             var item = [String: Any]()
 
@@ -1020,7 +1018,7 @@ public final class Keychain {
     // MARK:
 
     @discardableResult
-    fileprivate class func securityError(_ status: OSStatus) -> Error {
+    fileprivate class func securityError(status: OSStatus) -> Error {
         let error = Status(status: status)
         print("OSStatus error:[\(error.errorCode)] \(error.description)")
 
@@ -1028,8 +1026,8 @@ public final class Keychain {
     }
 
     @discardableResult
-    fileprivate func securityError(_ status: OSStatus) -> Error {
-        return type(of: self).securityError(status)
+    fileprivate func securityError(status: OSStatus) -> Error {
+        return type(of: self).securityError(status: status)
     }
 }
 
@@ -1191,7 +1189,7 @@ extension Options {
         return query
     }
 
-    func attributes(_ key: String?, value: Data) -> ([String: Any], Error?) {
+    func attributes(key: String?, value: Data) -> ([String: Any], Error?) {
         var attributes: [String: Any]
 
         if key != nil {
