@@ -37,6 +37,52 @@ class _blankspaceTests: XCTestCase
         return nil
     }
     
+    // MARK: Initialiser Tests
+    
+    func testGroup()
+    {
+        guard let value = loadJSON(forResource: "group") else { XCTFail(); return }
+        
+        let json = JSON(value)
+        let group = Group(json: json)
+        
+        XCTAssertNotNil(group)
+        XCTAssertEqual(group?.id, "1234")
+        XCTAssertEqual(group?.title, "Friends")
+    }
+    
+    func testPersonalContact()
+    {
+        guard let value = loadJSON(forResource: "personalContact") else { XCTFail(); return }
+        
+        let json = JSON(value)
+        let person = PersonalContact(json: json)
+        
+        XCTAssertNotNil(person)
+        XCTAssertEqual(person?.firstname, "John")
+        XCTAssertEqual(person?.surname, "Smith")
+        XCTAssertEqual(person?.mobile, "0410 123 456")
+        XCTAssertEqual(person?.group, "")
+        XCTAssertEqual(person?.id, "1000446786")
+    }
+    
+    func testBusinessContact()
+    {
+        guard let value = loadJSON(forResource: "businessContact") else { XCTFail(); return }
+        
+        let json = JSON(value)
+        let business = BusinessContact(json: json)
+        
+        XCTAssertNotNil(business)
+        XCTAssertEqual(business?.tradename, "onDemand Testing")
+        XCTAssertEqual(business?.legalname, "Blankspace Corp")
+        XCTAssertEqual(business?.email, "test@company.co")
+        XCTAssertEqual(business?.phonenumber, "02 1234 6749")
+        XCTAssertEqual(business?.group, "3394")
+        XCTAssertEqual(business?.id, "1258093")
+    }
+    
+    
     // MARK: API Tests
     
     func testLogin()

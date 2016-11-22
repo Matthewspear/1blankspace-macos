@@ -1,32 +1,32 @@
 {
-  "status": "OK",
-  "notes": "RETURNED",
-  "instance": "004",
-  "xhtmlcontext": "",
-  "data": {
-    "rows": [
-      {
-        "title": "Customer",
-        "reference": "",
-        "id": "6977"
-      },
-      {
-        "title": "Supplier",
-        "reference": "",
-        "id": "6978"
-      },
-      {
-        "title": "Friends",
-        "reference": "",
-        "id": "7137"
-      }
-    ]
-  },
-  "startrow": "0",
-  "rows": "100",
-  "morerows": "false",
-  "moreid": "126653585",
-  "summary": {
-    "contactcount": "3"
-  }
+    "status": "OK",
+    "notes": "RETURNED",
+    "instance": "004",
+    "xhtmlcontext": "",
+    "data": {
+        "rows": [
+                 {
+                 "title": "Customer",
+                 "reference": "",
+                 "id": "6977"
+                 },
+                 {
+                 "title": "Supplier",
+                 "reference": "",
+                 "id": "6978"
+                 },
+                 {
+                 "title": "Friends",
+                 "reference": "",
+                 "id": "7137"
+                 }
+                 ]
+    },
+    "startrow": "0",
+    "rows": "100",
+    "morerows": "false",
+    "moreid": "126653585",
+    "summary": {
+        "contactcount": "3"
+    }
 }

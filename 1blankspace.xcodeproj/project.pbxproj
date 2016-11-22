@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1A11CDB76CE3C401EAB13D08 /* Pods_1blankspaceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930F0F9C788E935F30943C69 /* Pods_1blankspaceTests.framework */; };
 		6EB4625766CD960B9AE89998 /* Pods_1blankspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469776E87867314E17575E20 /* Pods_1blankspace.framework */; };
+		A30168CB1DE487DD0071F355 /* group.json in Resources */ = {isa = PBXBuildFile; fileRef = A30168CA1DE487DD0071F355 /* group.json */; };
+		A30168CD1DE4883D0071F355 /* personalContact.json in Resources */ = {isa = PBXBuildFile; fileRef = A30168CC1DE4883D0071F355 /* personalContact.json */; };
+		A30168CF1DE488810071F355 /* businessContact.json in Resources */ = {isa = PBXBuildFile; fileRef = A30168CE1DE488810071F355 /* businessContact.json */; };
 		A34060511D5D30DB0070E252 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3670E801D52C111007CFE86 /* API.swift */; };
 		A34060531D5D3D460070E252 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34060521D5D3D460070E252 /* Utilities.swift */; };
 		A359C4111D72ED15007C5FCA /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = A359C40F1D72E62D007C5FCA /* Group.swift */; };
@@ -49,6 +52,9 @@
 		469776E87867314E17575E20 /* Pods_1blankspace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_1blankspace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E4D8194D4A729F56FB310E0 /* Pods-1blankspaceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1blankspaceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-1blankspaceTests/Pods-1blankspaceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		930F0F9C788E935F30943C69 /* Pods_1blankspaceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_1blankspaceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30168CA1DE487DD0071F355 /* group.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = group.json; sourceTree = "<group>"; };
+		A30168CC1DE4883D0071F355 /* personalContact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = personalContact.json; sourceTree = "<group>"; };
+		A30168CE1DE488810071F355 /* businessContact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = businessContact.json; sourceTree = "<group>"; };
 		A34060521D5D3D460070E252 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A34060541D5D40840070E252 /* 1blankspace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = 1blankspace.entitlements; sourceTree = "<group>"; };
 		A359C40F1D72E62D007C5FCA /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 			children = (
 				A3670E631D52A485007CFE86 /* _blankspaceTests.swift */,
 				A3E6A74C1DE13AF400A2EBF0 /* Utillities.swift */,
+				A30168CA1DE487DD0071F355 /* group.json */,
+				A30168CC1DE4883D0071F355 /* personalContact.json */,
+				A30168CE1DE488810071F355 /* businessContact.json */,
 				A3E6A7421DE0FEA500A2EBF0 /* login.json */,
 				A3E6A7471DE12B8B00A2EBF0 /* personalGroups.json */,
 				A3E6A7451DE12B8B00A2EBF0 /* businessGroups.json */,
@@ -301,8 +310,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3E6A74A1DE12B8B00A2EBF0 /* personalContacts.json in Resources */,
+				A30168CF1DE488810071F355 /* businessContact.json in Resources */,
 				A3E6A7481DE12B8B00A2EBF0 /* businessContacts.json in Resources */,
 				A3E6A7491DE12B8B00A2EBF0 /* businessGroups.json in Resources */,
+				A30168CB1DE487DD0071F355 /* group.json in Resources */,
+				A30168CD1DE4883D0071F355 /* personalContact.json in Resources */,
 				A3E6A7431DE0FEA500A2EBF0 /* login.json in Resources */,
 				A3E6A74B1DE12B8B00A2EBF0 /* personalGroups.json in Resources */,
 			);
