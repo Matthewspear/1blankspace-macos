@@ -11,7 +11,7 @@ import SwiftyJSON
 
 /**
  Group object created from the `API`.
-  
+ 
  Can be initialised with parameters for testing or via a JSON object.
  
  - parameter title:   Title of the group.
@@ -19,15 +19,15 @@ import SwiftyJSON
  */
 public struct Group
 {
-  let title: String
-  let id: String
+    let title: String
+    let id: String
 }
 
 extension Group
 {
-  init?(json: JSON)
-  {
-    guard let title = json["title"].string, let id = json["id"].string else { return nil }
-    self.init(title: title, id: id)
-  }
+    init?(json: JSON)
+    {
+        guard let title = json["title"].string, let id = json["id"].string else { return nil }
+        self.init(title: title, id: id)
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import KeychainAccess
+import Foundation
 
 // Useful constants
 
@@ -15,4 +16,4 @@ let bundleIdentifer = Bundle.main.bundleIdentifier!
 let keychain = Keychain(service: "uk.co.matthewspear.-blankspace")
 
 let userDefaults = UserDefaults.standard
-let userSession = UserSession.sharedInstance
+let notificationCenter = NotificationCenter.default

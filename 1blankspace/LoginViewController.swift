@@ -19,14 +19,12 @@ class LoginViewController: NSViewController
   
   @IBOutlet var cancelButton: NSButton!
   @IBOutlet var loginButton: NSButton!
-  
-  var username: String
-  {
+    
+  var username: String {
     return loginTextField.stringValue
   }
   
-  var password: String
-  {
+  var password: String {
     return passwordTextField.stringValue
   }
   
@@ -50,7 +48,7 @@ class LoginViewController: NSViewController
   {
     API.login(username, password: password, completion: { result in
       
-      userSession.sid = result
+      UserSession.sid = result
       self.enableView()
       self.progressIndicator.stopAnimation(self)
       self.performSegue(withIdentifier: "toMainView", sender: self)
@@ -58,7 +56,7 @@ class LoginViewController: NSViewController
       
     }) { error in
       
-      self.presentError(error)
+//      self.presentError(error)
       self.errorTextField.isHidden = false
       self.enableView()
       self.progressIndicator.stopAnimation(self)

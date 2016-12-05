@@ -9,18 +9,15 @@
 import Foundation
 
 /**
-   Singleton used for storing / accessing variable for user session.
+ Singleton used for storing / accessing variable for user session.
  
  - parameter sid:               Session id for current session.
- - parameter personalGroups:    Personal groups for current session.
- - parameter businessGroups:    Business groups for current session.
  */
 public class UserSession
 {
-  static let sharedInstance = UserSession()
-  private init(){}
-  
-  var sid: String?
-  var personalGroups: [Group]?
-  var businessGroups: [Group]?
+    private init(){}
+    
+    static var sid: String?
+    static var businessContacts: [BusinessContact]?
+    static var personalContacts: [PersonalContact]?
 }

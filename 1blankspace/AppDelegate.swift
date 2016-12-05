@@ -34,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
       print("Launching for the first time...")
       userDefaults.set("", forKey: "login")
       userDefaults.set(false, forKey: "rememberMe")
+      userDefaults.set(0, forKey: "SelectedEndpoint")
       userDefaults.set(true, forKey: "hasLaunched")
       userDefaults.synchronize()
     }
