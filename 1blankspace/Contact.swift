@@ -10,7 +10,11 @@ import Foundation
 import SwiftyJSON
 
 
-protocol Contact {}
+protocol Contact
+{
+    var id: String { get }
+    var group: String { get }
+}
 
 /**
  PersonalContact object created from the `API`.

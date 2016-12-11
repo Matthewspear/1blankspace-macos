@@ -32,20 +32,45 @@ class MainViewController: NSViewController
             isEnabled ? spinner.stopAnimation(nil) : spinner.startAnimation(nil)
             
             addButton.isEnabled = isEnabled
-            editButton.isEnabled = isEnabled
-            removeButton.isEnabled = isEnabled
             endpointTableView.isEnabled = isEnabled
             groupTableView.isEnabled = isEnabled
             dataTableView.isEnabled = isEnabled
         }
     }
     
+    var contactsInEndpoint = 0
+    var currentContacts: [Contact] = []
+    var currentGroups: [Group] = []
+    
     var selectedEndpoint: Endpoint {
         return endpointTableView.selectedRow == 0 ? .personal : .business
     }
     
-    var currentContacts: [Contact] = []
-    var currentGroups: [Group] = []
+    var selectedGroup: Group? {
+        
+        let index = groupTableView.selectedRow
+        
+        switch index
+        {
+        case 0: return Group(title: "All (\(contactsInEndpoint))", id: "")
+        case 1...(currentGroups.count + 1): return currentGroups[index - 1]
+        default: return nil
+        }
+    }
+    
+    var selectedContact: Contact? {
+        
+        let index = dataTableView.selectedRow
+        
+        if currentContacts.indices.contains(index)
+        {
+            return currentContacts[index]
+        }
+        else
+        {
+            return nil
+        }
+    }
     
     override func viewWillAppear()
     {
@@ -79,6 +104,8 @@ class MainViewController: NSViewController
         groupTableView.dataSource = self
         dataTableView.dataSource = self
         
+        dataTableView.doubleAction = #selector(MainViewController.doubleClickAction)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.reloadTables), name: MainViewController.reloadNotification, object: nil)
     }
     
@@ -103,6 +130,7 @@ class MainViewController: NSViewController
                 API.personal(sid: sid, completion: { contacts in
                     
                     self.currentContacts = contacts
+                    self.contactsInEndpoint = contacts.count
                     notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": true, "dataTable": true])
                     
                 }, failure: { error in
@@ -114,6 +142,7 @@ class MainViewController: NSViewController
                 API.business(sid: sid, completion: { contacts in
                     
                     self.currentContacts = contacts
+                    self.contactsInEndpoint = contacts.count
                     notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": true, "dataTable": true])
                     
                 }, failure: { error in
@@ -150,6 +179,8 @@ class MainViewController: NSViewController
                 }
                 
                 self.isEnabled = true
+                self.editButton.isEnabled = false
+                self.removeButton.isEnabled = false
             }
         }
     }
@@ -178,21 +209,80 @@ class MainViewController: NSViewController
         self.presentError(loginError)
     }
     
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?)
+    {
+        if let identifer = segue.identifier
+        {
+            let windowController = segue.destinationController as! NSWindowController
+            let panelVC = windowController.contentViewController as! PanelViewController
+            
+            switch identifer
+            {
+            case "toAddView":
+                
+                panelVC.mode = .add
+                panelVC.groups = [Group(title: "All (\(contactsInEndpoint))", id: "")] + currentGroups
+                panelVC.selectedGroup = selectedGroup
+                
+            case "toEditView":
+                panelVC.mode = .edit
+                panelVC.groups = [Group(title: "All (\(contactsInEndpoint))", id: "")] + currentGroups
+                
+                panelVC.selectedGroup = currentGroups.filter { group in
+                    group.id == selectedContact?.group
+                    }.first
+                
+                panelVC.editContact = selectedContact
+                
+            default:
+                break
+            }
+            
+            switch selectedEndpoint
+            {
+            case .personal:
+                panelVC.label1.stringValue = "First Name"
+                panelVC.label2.stringValue = "Last Name"
+                panelVC.label3.stringValue = "Email"
+                panelVC.label4.stringValue = "Phone"
+                panelVC.label5.stringValue = "Group"
+                
+            case .business:
+                panelVC.label1.stringValue = "Legal Name"
+                panelVC.label2.stringValue = "Trade Name"
+                panelVC.label3.stringValue = "Email"
+                panelVC.label4.stringValue = "Phone"
+                panelVC.label5.stringValue = "Group"
+            }
+        }
+    }
+    
     // MARK: View Controller Actions
+    
+    func doubleClickAction()
+    {
+        self.performSegue(withIdentifier: "toEditView", sender: self)
+    }
     
     @IBAction func addAction(_ sender: NSButton)
     {
         print("Add triggered")
+        self.performSegue(withIdentifier: "toAddView", sender: self)
     }
     
     @IBAction func editAction(_ sender: NSButton)
     {
         print("Edit triggered")
+        self.performSegue(withIdentifier: "toEditView", sender: self)
     }
     
     @IBAction func removeAction(_ sender: NSButton)
     {
         print("Remove triggered")
+        
+        // Call API remove method
+        
+        // Remove from tableview
     }
     
     @IBAction func selectEndpoint(_ sender: NSTableView)
@@ -274,6 +364,25 @@ extension MainViewController: NSTableViewDataSource
         default:  return 0
         }
     }
+    
+    func tableViewSelectionDidChange(_ notification: Notification)
+    {
+        let tableView = notification.object as! NSTableView
+        
+        print(tableView.selectedRow)
+        
+        if tableView.selectedRow == -1
+        {
+            editButton.isEnabled = false
+            removeButton.isEnabled = false
+        }
+        
+        if tableView.isEqual(dataTableView) && tableView.selectedRow != -1
+        {
+            editButton.isEnabled = true
+            removeButton.isEnabled = true
+        }
+    }
 }
 
 //MARK: Table View Delegate
@@ -294,7 +403,7 @@ extension MainViewController: NSTableViewDelegate
                 
             case ("GroupTable", 0):
                 let groupCell = tableView.make(withIdentifier: "GroupCell", owner: nil) as! NSTableCellView
-                groupCell.textField?.stringValue = "All (\(currentContacts.count))"
+                groupCell.textField?.stringValue = "All (\(contactsInEndpoint))"
                 return groupCell
                 
             case ("GroupTable", 1...Int.max):
@@ -354,4 +463,4 @@ extension MainViewController: NSTableViewDelegate
         }
         return nil
     }
- }
+}
