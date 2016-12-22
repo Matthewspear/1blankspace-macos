@@ -54,13 +54,13 @@ class LoginViewController: NSViewController
       self.performSegue(withIdentifier: "toMainView", sender: self)
       self.view.window?.close()
       
-    }) { error in
+    }, failure: { error in
       
-//      self.presentError(error)
+      self.presentError(error)
       self.errorTextField.isHidden = false
       self.enableView()
       self.progressIndicator.stopAnimation(self)
-    }
+    })
   }
   
   func disableView()

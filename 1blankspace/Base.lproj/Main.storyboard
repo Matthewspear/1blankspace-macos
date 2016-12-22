@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Khp-Dz-1ar">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Khp-Dz-1ar">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -239,6 +239,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="searchAction:" target="B8D-0N-5wS" id="fvY-G1-YZD"/>
+                                        </connections>
                                     </searchField>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -293,7 +296,7 @@
                 </windowController>
                 <customObject id="wjv-1c-N54" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102.5" y="1409"/>
+            <point key="canvasLocation" x="103" y="1515"/>
         </scene>
         <!--Edit-->
         <scene sceneID="776-9Q-C3J">
@@ -406,7 +409,7 @@ Gw
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="cancelAction:" target="KKZ-Iy-0p3" id="m8f-3P-JY6"/>
+                                    <action selector="cancelAction:" target="KKZ-Iy-0p3" id="H2i-hy-FSC"/>
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T8f-Yd-bBr">
@@ -437,7 +440,7 @@ Gw
                 </viewController>
                 <customObject id="51L-OF-l5p" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="594.5" y="1409"/>
+            <point key="canvasLocation" x="561" y="1506"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Va9-oP-79o">
