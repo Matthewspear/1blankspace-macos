@@ -117,11 +117,10 @@ public struct API
      })
      ```
      
-     - parameter endpoint:      Selection of either personal or business groups.
+     - parameter endpoint:      Selection of either person or business groups.
      - parameter sid:           Session id provided for access to the API available from logon method.
      - parameter completion:    Closure called when method succeeds holding an array of `Group`.
      - parameter failure:       Closure called when method fails holding the error.
-     
      */
     public static func group(_ endpoint: Endpoint, sid: String, completion: @escaping ([Group]) -> Void, failure: @escaping (NSError) -> Void)
     {
@@ -185,17 +184,70 @@ public struct API
         }
         else
         {
+            print("Error creating a Contact - Malformed JSON: \(json)")
             // Corrupt, malformed or nil JSON
-            let userInfo: [String: Any] = [
-                NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
-                NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
-            let error = NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
-            print(error)
-            
+            let error = generateError()
             failure(error)
         }
     }
     
+    /**
+     Links a contact to a group on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
+     
+     ### Usage Example: ###
+     ```
+     API.groupLink("1224233", group: "1234", endpoint: .personal, sid: "000-k-00aaa00aaaa0a00...", completion: { result in
+     
+     // Handle result here
+     
+     }, failure: { error in
+     
+     // Handle error here
+     
+     })
+     ```
+     
+     - parameter contact:       Contact id of the contact to be linked.
+     - parameter group:         Group id of the group to be linked to.
+     - parameter endpoint:      Selection of either person or business groups.
+     - parameter sid:           Session id provided for access to the API available from logon method.
+     - parameter completion:    Closure called when method succeeds holding status value.
+     - parameter failure:       Closure called when method fails holding the error.
+     */
+    public static func groupLink(_ contact: String, group: String, endpoint: Endpoint, sid: String, completion: @escaping (Bool) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        var method: String
+        
+        switch endpoint
+        {
+        case .personal: method = "CONTACT_PERSON_GROUP_MANAGE"
+        case .business: method = "CONTACT_BUSINESS_GROUP_MANAGE"
+        }
+        
+        let url = "\(baseURL)contact/?method=\(method)"
+        
+        let body: [String: Any] = [
+            "rf": "JSON",
+            "sid": "\(sid)",
+            "group": group,
+            "contactperson": contact,
+            "contactbusiness": contact
+        ]
+        
+        let encoding = JSONEncoding.default
+        
+        request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
+            
+            switch response.result
+            {
+            case .success(let value):
+                processStatus(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
+        })
+    }
     
     // MARK: Personal Contact Method
     
@@ -219,11 +271,10 @@ public struct API
      })
      ```
      
-     - parameter group:         Group id used to restrict result to a specific group
-     - parameter search:        Search string to restrict results to a specific search
+     - parameter group:         Optional group id used to restrict result to a specific group.
+     - parameter search:        Optional search query to restrict results to a specific search.
      - parameter completion:    Closure called when method succeeds holding an array of `PersonalContact`.
      - parameter failure:       Closure called when method fails holding the error.
-     
      */
     public static func personal(_ group: String? = nil, search: String? = nil, sid: String, completion: @escaping ([PersonalContact]) -> Void, failure: @escaping (NSError) -> Void)
     {
@@ -302,8 +353,8 @@ public struct API
      })
      ```
      
-     - parameter group:         Group id used to restrict result to a specific group
-     - parameter search:        Search string to restrict results to a specific search
+     - parameter group:         Optional group id used to restrict result to a specific group.
+     - parameter search:        Optional search query to restrict results to a specific search.
      - parameter completion:    Closure called when method succeeds holding an array of `BusinessContact`.
      - parameter failure:       Closure called when method fails holding the error.
      
@@ -336,11 +387,11 @@ public struct API
             "rf": "JSON",
             "sid": "\(sid)",
             "advanced": 1,
-            "fields": [["name": "Legalname"],
-                       ["name": "Tradename"],
-                       ["name": "Email"],
-                       ["name": "PhoneNumber"],
-                       ["name": "BusinessGroup"]],
+            "fields": [["name": "legalname"],
+                       ["name": "tradename"],
+                       ["name": "email"],
+                       ["name": "phonenumber"],
+                       ["name": "businessgroup"]],
             "summaryFields": [["name": "count contactcount"]],
             "filters": filters,
             "options": ["rows": 100]
@@ -399,19 +450,274 @@ public struct API
         }
     }
     
+    // MARK: Add Method
+    
+    /**
+     Add contacts to the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
+     
+     ### Usage Example: ###
+     ```
+     let sid = "000-k-00aaa00aaaa0a00..."
+     let contact = PersonalContact(json: "...")
+     
+     API.add(contact: contact, endpoint: .personal, sid: sid, completion: { id in
+     
+     // Handle result here
+     
+     }, failure: { error in
+     
+     // Handle error here
+     
+     })
+     ```
+     
+     - parameter contact:       Contact to be added.
+     - parameter endpoint:      Selection of either personal or business contact.
+     - parameter sid:           Session id provided for access to the API available from logon method.
+     - parameter completion:    Closure called when method succeeds holding the `id` of the created contact.
+     - parameter failure:       Closure called when method fails holding the error.
+     */
+    
+    public static func add<T>(contact: T, endpoint: Endpoint, sid: String, completion: @escaping (String) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        let method = (endpoint == .personal) ? "CONTACT_PERSON_MANAGE" : "CONTACT_BUSINESS_MANAGE"
+        let url = "\(baseURL)contact/?method=\(method)"
+        
+        var body: [String : Any] = [
+            "rf": "JSON" as AnyObject,
+            "sid": "\(sid)" as AnyObject,
+            "advanced": 1 as AnyObject]
+        
+        if let contact = contact as? PersonalContact
+        {
+            body["firstname"] = contact.firstname
+            body["surname"] = contact.surname
+            body["email"] = contact.email
+            body["persongroup"] = contact.group
+            body["mobile"] = contact.mobile
+        }
+        
+        if let contact = contact as? BusinessContact
+        {
+            body["legalname"] = contact.legalname
+            body["tradename"] = contact.tradename
+            body["email"] = contact.email
+            body["businessgroup"] = contact.group
+            body["phonenumber"] = contact.phonenumber
+        }
+        
+        let encoding = JSONEncoding.default
+        
+        request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
+            
+            switch response.result
+            {
+            case .success(let value):
+                processAdd(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
+        })
+    }
+    
+    /**
+     Internal method for parsing the response to adding a contact, extracted to allowing for easier testing.
+     */
+    internal static func processAdd(value: Any, completion: (String) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        let json = JSON(value)
+        
+        print(json)
+        
+        if let id = json["id"].string
+        {
+            completion(id)
+        }
+        else
+        {
+            if let error = json["error"].dictionary, let note = error["errornotes"]?.string
+            {
+                failure(generateError(title: note))
+            }
+            else
+            {
+                failure(generateError())
+            }
+        }
+    }
+    
+    
     // MARK: Edit Method
     
-    // MARK: Cancel Method
+    /**
+     Edit contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
+     
+     ### Usage Example: ###
+     ```
+     let sid = "000-k-00aaa00aaaa0a00..."
+     let contact = BusinessContact(json: "...")
+     
+     API.edit(contact: contact, endpoint: .business, sid: sid, completion: { edited in
+     
+     // Handle result here
+     
+     }, failure: { error in
+     
+     // Handle error here
+     
+     })
+     ```
+     
+     - parameter contact:       Edited contact, uses id to update contact.
+     - parameter endpoint:      Selection of either personal or business contact.
+     - parameter sid:           Session id provided for access to the API available from logon method.
+     - parameter completion:    Closure called when method succeeds holding status value.
+     - parameter failure:       Closure called when method fails holding the error.
+     */
+    public static func edit<T>(contact: T, endpoint: Endpoint, sid: String, completion: @escaping (Bool) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        let method = (endpoint == .personal) ? "CONTACT_PERSON_MANAGE" : "CONTACT_BUSINESS_MANAGE"
+        let url = "\(baseURL)contact/?method=\(method)"
+        
+        var body: [String : Any] = [
+            "rf": "JSON" as AnyObject,
+            "sid": "\(sid)" as AnyObject,
+            "advanced": 1 as AnyObject]
+        
+        if let contact = contact as? PersonalContact
+        {
+            body["firstname"] = contact.firstname
+            body["surname"] = contact.surname
+            body["email"] = contact.email
+            body["id"] = contact.id
+            body["persongroup"] = contact.group
+            body["mobile"] = contact.mobile
+        }
+        
+        if let contact = contact as? BusinessContact
+        {
+            body["legalname"] = contact.legalname
+            body["tradename"] = contact.tradename
+            body["email"] = contact.email
+            body["id"] = contact.id
+            body["businessgroup"] = contact.group
+            body["phonenumber"] = contact.phonenumber
+        }
+        
+        let encoding = JSONEncoding.default
+        
+        request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
+            
+            switch response.result
+            {
+            case .success(let value):
+                processStatus(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
+        })
+    }
+    
+    // MARK: Remove Method
+
+    /**
+     Remove a contacts from the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.
+     
+     ### Usage Example: ###
+     ```
+     let sid = "000-k-00aaa00aaaa0a00..."
+     let contact = BusinessContact(json: "...")
+     
+     API.remove(contact: contact, endpoint: .business, sid: sid, completion: { removed in
+     
+     // Handle result here
+     
+     }, failure: { error in
+     
+     // Handle error here
+     
+     })
+     ```
+     
+     - parameter contact:       Contact to be removed.
+     - parameter endpoint:      Selection of either personal or business contact.
+     - parameter sid:           Session id provided for access to the API available from logon method.
+     - parameter completion:    Closure called when method succeeds holding status value.
+     - parameter failure:       Closure called when method fails holding the error.
+     */
+    public static func remove<T>(contact: T, endpoint: Endpoint, sid: String, completion: @escaping (Bool) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        let method = (endpoint == .personal) ? "CONTACT_PERSON_MANAGE" : "CONTACT_BUSINESS_MANAGE"
+        let url = "\(baseURL)contact/?method=\(method)"
+        
+        var body: [String : Any] = [
+            "rf": "JSON",
+            "sid": "\(sid)",
+            "advanced": 1,
+            "remove": 1]
+        
+        if let contact = contact as? Contact
+        {
+            body["id"] = contact.id
+        }
+        
+        let encoding = JSONEncoding.default
+        
+        request = Alamofire.request(url, method: .post, parameters: body, encoding: encoding, headers: nil).validate().responseJSON(completionHandler: { response in
+            
+            switch response.result
+            {
+            case .success(let value):
+                processStatus(value: value, completion: completion, failure: failure)
+                
+            case .failure(let error):
+                failure(error as NSError)
+            }
+        })
+    }
+    
+    /**
+     Internal method for parsing the response status, extracted to allowing for easier testing.
+     */
+    internal static func processStatus(value: Any, completion: (Bool) -> Void, failure: @escaping (NSError) -> Void)
+    {
+        let json = JSON(value)
+        
+        print(json)
+        
+        if json["status"].stringValue == "OK"
+        {
+            completion(true)
+        }
+        else
+        {
+            if let error = json["error"].dictionary, let note = error["errornotes"]?.string
+            {
+                failure(generateError(title: note))
+            }
+            else
+            {
+                failure(generateError())
+            }
+        }
+    }
     
     // MARK: JSON Error
     
-    private static func generateError() -> NSError
+    /**
+     Private method for generating errors.
+     */
+    private static func generateError(title: String = "Could not read in JSON") -> NSError
     {
         let userInfo: [AnyHashable: Any] = [
-            NSLocalizedDescriptionKey: NSLocalizedString("Could not read in JSON", comment: ""),
+            NSLocalizedDescriptionKey: NSLocalizedString(title, comment: ""),
             NSLocalizedFailureReasonErrorKey: NSLocalizedString("JSON is corrupt, malformed or nil", comment: "")]
         return NSError(domain: bundleIdentifer, code: -1, userInfo: userInfo)
     }
+    
+    // MARK: Cancel Method
     
     /**
      Cancel current API request
@@ -422,4 +728,3 @@ public struct API
         request = nil
     }
 }
-

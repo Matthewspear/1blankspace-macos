@@ -260,7 +260,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Selection of either personal or business groups.</p>
+                                  <p>Selection of either person or business groups.</p>
 
                                 </div>
                               </td>
@@ -287,6 +287,130 @@
                               <td>
                                 <div>
                                   <p>Closure called when method succeeds holding an array of <code>Group</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API9groupLinkFTSS5groupSS8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_"></a>
+                    <a name="//apple_ref/swift/Method/groupLink(_:group:endpoint:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API9groupLinkFTSS5groupSS8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_">groupLink(_:group:endpoint:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Links a contact to a group on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>API.groupLink(<q>1224233</q>, group: <q>1234</q>, endpoint: .personal, sid: <q>000-k-00aaa00aaaa0a00...</q>, completion: { result in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">groupLink</span><span class="p">(</span><span class="n">_</span> <span class="nv">contact</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">group</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">endpoint</span><span class="p">:</span> <span class="kt"><a href="../Enums/Endpoint.html">Endpoint</a></span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contact</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Contact id of the contact to be linked.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>group</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Group id of the group to be linked to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selection of either person or business groups.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Session id provided for access to the API available from logon method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding status value.</p>
 
                                 </div>
                               </td>
@@ -377,7 +501,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Group id used to restrict result to a specific group</p>
+                                  <p>Optional group id used to restrict result to a specific group.</p>
 
                                 </div>
                               </td>
@@ -390,7 +514,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Search string to restrict results to a specific search</p>
+                                  <p>Optional search query to restrict results to a specific search.</p>
 
                                 </div>
                               </td>
@@ -494,7 +618,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Group id used to restrict result to a specific group</p>
+                                  <p>Optional group id used to restrict result to a specific group.</p>
 
                                 </div>
                               </td>
@@ -507,7 +631,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Search string to restrict results to a specific search</p>
+                                  <p>Optional search query to restrict results to a specific search.</p>
 
                                 </div>
                               </td>
@@ -546,10 +670,385 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Add%20Method"></a>
+                <a name="//apple_ref/swift/Section/Add Method" class="dashAnchor"></a>
+                <a href="#/Add%20Method">
+                  <h3 class="section-name">Add Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API3addurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSST_7failureFCSo7NSErrorT__T_"></a>
+                    <a name="//apple_ref/swift/Method/add(contact:endpoint:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API3addurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSST_7failureFCSo7NSErrorT__T_">add(contact:endpoint:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add contacts to the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>let sid = <q>000-k-00aaa00aaaa0a00...</q>
+let contact = PersonalContact(json: <q>...</q>)</p>
+
+<p>API.add(contact: contact, endpoint: .personal, sid: sid, completion: { id in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">add</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">contact</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">endpoint</span><span class="p">:</span> <span class="kt"><a href="../Enums/Endpoint.html">Endpoint</a></span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contact</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Contact to be added.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selection of either personal or business contact.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Session id provided for access to the API available from logon method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding the <code>id</code> of the created contact.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Edit%20Method"></a>
+                <a name="//apple_ref/swift/Section/Edit Method" class="dashAnchor"></a>
+                <a href="#/Edit%20Method">
+                  <h3 class="section-name">Edit Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API4editurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_"></a>
+                    <a name="//apple_ref/swift/Method/edit(contact:endpoint:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API4editurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_">edit(contact:endpoint:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Edit contacts on the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>let sid = <q>000-k-00aaa00aaaa0a00...</q>
+let contact = BusinessContact(json: <q>...</q>)</p>
+
+<p>API.edit(contact: contact, endpoint: .business, sid: sid, completion: { edited in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">edit</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">contact</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">endpoint</span><span class="p">:</span> <span class="kt"><a href="../Enums/Endpoint.html">Endpoint</a></span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contact</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Edited contact, uses id to update contact.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selection of either personal or business contact.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Session id provided for access to the API available from logon method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding status value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Remove%20Method"></a>
+                <a name="//apple_ref/swift/Section/Remove Method" class="dashAnchor"></a>
+                <a href="#/Remove%20Method">
+                  <h3 class="section-name">Remove Method</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV11_blankspace3API6removeurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_"></a>
+                    <a name="//apple_ref/swift/Method/remove(contact:endpoint:sid:completion:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV11_blankspace3API6removeurFT7contactx8endpointOS_8Endpoint3sidSS10completionFSbT_7failureFCSo7NSErrorT__T_">remove(contact:endpoint:sid:completion:failure:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove a contacts from the mydigitalstructure.com platform via the API. Results accessed via completion and failure closures, depending on if the call is successful.</p>
+
+<p><a href='#usage-example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='usage-example'>Usage Example:</h3>
+<pre class="highlight plaintext"><code>let sid = <q>000-k-00aaa00aaaa0a00...</q>
+let contact = BusinessContact(json: <q>...</q>)</p>
+
+<p>API.remove(contact: contact, endpoint: .business, sid: sid, completion: { removed in</p>
+
+<p>// Handle result here</p>
+
+<p>}, failure: { error in</p>
+
+<p>// Handle error here</p>
+
+<p>})
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">remove</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">contact</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">endpoint</span><span class="p">:</span> <span class="kt"><a href="../Enums/Endpoint.html">Endpoint</a></span><span class="p">,</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">NSError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contact</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Contact to be removed.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selection of either personal or business contact.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Session id provided for access to the API available from logon method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method succeeds holding status value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure called when method fails holding the error.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-11-20)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-12-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
