@@ -340,10 +340,41 @@ class MainViewController: NSViewController
         })
     }
     
+    func searchAction(value: String)
+    {
+        guard let sid = UserSession.sid else { return }
         
-        // Call API remove method
+        switch selectedEndpoint
+        {
+        case .personal:
+            
+            API.personal(nil, search: value, sid: sid, completion: { contacts in
+                
+                self.currentContacts = contacts
+                notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": false, "dataTable": true])
+                
+            }, failure: { error in
+                
+                print(error)
+                
+            })
+            
+        case .business:
+            
+            API.business(nil, search: value, sid: sid, completion: { contacts in
+                
+                self.currentContacts = contacts
+                notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": false, "dataTable": true])
+                
+            }, failure: { error in
+                
+                print(error)
+                
+            })
+            
+        }
         
-        // Remove from tableview
+        print("Searching: \(value)")
     }
     
     @IBAction func selectEndpoint(_ sender: NSTableView)

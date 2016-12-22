@@ -13,11 +13,18 @@ class MainWindowController: NSWindowController
     override func windowDidLoad()
     {
         super.windowDidLoad()
-    
+        
         if let window = window
         {
             window.titleVisibility = .hidden
         }
     }
-
+    
+    @IBAction func searchAction(_ sender: NSSearchField)
+    {
+        if let mainVC = self.contentViewController as? MainViewController
+        {
+            mainVC.searchAction(value: sender.stringValue)
+        }
+    }
 }
