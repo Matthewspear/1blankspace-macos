@@ -34,6 +34,8 @@ class PanelViewController: NSViewController
     @IBOutlet var okButton: NSButton!
     @IBOutlet var cancelButton: NSButton!
     
+    var endpoint: Endpoint = .personal
+    
     var mode: PanelMode = .add {
         didSet {
             self.view.window?.title = mode.rawValue
@@ -62,10 +64,10 @@ class PanelViewController: NSViewController
             }
         }
     }
-
-    var editContact: Contact? {
+    
+    var selectedContact: Contact? {
         didSet {
-            if let contact = editContact as? PersonalContact
+            if let contact = selectedContact as? PersonalContact
             {
                 column1.stringValue = contact.firstname
                 column2.stringValue = contact.surname
@@ -73,13 +75,37 @@ class PanelViewController: NSViewController
                 column4.stringValue = contact.mobile
             }
             
-            if let contact = editContact as? BusinessContact
+            if let contact = selectedContact as? BusinessContact
             {
                 column1.stringValue = contact.legalname
                 column2.stringValue = contact.tradename
                 column3.stringValue = contact.email
                 column4.stringValue = contact.phonenumber
             }
+        }
+    }
+    
+    var contactsInEndpoint: Int {
+        get {
+            return userDefaults.integer(forKey: "contacts")
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: "contacts")
+        }
+    }
+    
+    var isEnabled: Bool  = false {
+        didSet {
+            
+            column1.isEditable = isEnabled
+            column2.isEditable = isEnabled
+            column3.isEditable = isEnabled
+            column4.isEditable = isEnabled
+            column5.isEnabled = isEnabled
+            
+            okButton.isEnabled = isEnabled
+            cancelButton.isEnabled = isEnabled
         }
     }
     
@@ -93,23 +119,92 @@ class PanelViewController: NSViewController
         column4.delegate = self
     }
     
-    @IBAction func okAction(_ sender: NSButton)
+    @IBAction func okAction(_ sender: Any)
     {
-        print("OK triggered")
+        isEnabled = false
         
-        print(column1.stringValue)
-        print(column2.stringValue)
-        print(column3.stringValue)
-        print(column4.stringValue)
-        print(column5.indexOfSelectedItem)
-        
-        self.view.window?.close()
+        switch mode
+        {
+        case .add: addContact()
+        case .edit: editContact()
+        }
     }
     
     @IBAction func cancelAction(_ sender: NSButton)
     {
-        print("Cancel triggered")
+        isEnabled = false
         self.view.window?.close()
+    }
+    
+    func addContact()
+    {
+        guard let sid = UserSession.sid else { return }
+        guard let groupid = groups?[column5.indexOfSelectedItem].id else { return }
+        
+        var contact: Contact
+        
+        if endpoint == .personal
+        {
+            contact = PersonalContact(id: "", firstname: column1.stringValue, surname: column2.stringValue, email: column3.stringValue, mobile: column4.stringValue, group: groupid)
+        }
+        else
+        {
+            contact = BusinessContact(id: "", tradename: column2.stringValue, legalname: column1.stringValue, email: column3.stringValue, phonenumber: column4.stringValue, group: groupid)
+        }
+        
+        API.add(contact: contact, endpoint: endpoint, sid: sid, completion: { id in
+            
+            if contact.group.isEmpty
+            {
+                notificationCenter.post(name: MainViewController.reloadDataNotif, object: self.endpoint)
+                self.contactsInEndpoint += 1
+                self.view.window?.close()
+            }
+            else
+            {
+                API.groupLink(id, group: contact.group, endpoint: self.endpoint, sid: sid, completion: { added in
+
+                        notificationCenter.post(name: MainViewController.reloadDataNotif, object: self.endpoint)
+                        self.contactsInEndpoint += 1
+                        self.view.window?.close()
+                    
+                }, failure: {
+                    self.presentError($0)
+                    self.isEnabled = true
+                })
+            }
+            
+        }, failure: {
+            self.presentError($0)
+            self.isEnabled = true
+        })
+    }
+
+    func editContact()
+    {
+        var contact: Contact
+
+        guard let sid = UserSession.sid else { return }
+        guard let id = selectedContact?.id else { return }
+        guard let groupid = groups?[column5.indexOfSelectedItem].id else { return }
+
+        if endpoint == .personal
+        {
+            contact = PersonalContact(id: id, firstname: column1.stringValue, surname: column2.stringValue, email: column3.stringValue, mobile: column4.stringValue, group: groupid)
+        }
+        else
+        {
+            contact = BusinessContact(id: id, tradename: column2.stringValue, legalname: column1.stringValue, email: column3.stringValue, phonenumber: column4.stringValue, group: groupid)
+        }
+
+        API.edit(contact: contact, endpoint: endpoint, sid: sid, completion: { edited in
+
+                notificationCenter.post(name: MainViewController.reloadDataNotif, object: self.endpoint)
+                self.view.window?.close()
+                
+        }, failure: {
+            self.presentError($0)
+        })
     }
 }
 
@@ -120,6 +215,8 @@ extension PanelViewController: NSTextFieldDelegate
         if commandSelector == #selector(self.insertNewline)
         {
             print("Enter Pressed")
+            okAction(self)
+            
             return true
         }
         return false

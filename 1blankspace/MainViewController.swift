@@ -259,10 +259,11 @@ class MainViewController: NSViewController
             let windowController = segue.destinationController as! NSWindowController
             let panelVC = windowController.contentViewController as! PanelViewController
             
+            panelVC.endpoint = selectedEndpoint
+            
             switch identifer
             {
             case "toAddView":
-                
                 panelVC.mode = .add
                 panelVC.groups = [Group(title: "All (\(contactsInEndpoint))", id: "")] + currentGroups
                 panelVC.selectedGroup = selectedGroup
@@ -275,7 +276,8 @@ class MainViewController: NSViewController
                     group.id == selectedContact?.group
                     }.first
                 
-                panelVC.editContact = selectedContact
+                panelVC.column5.isEnabled = false
+                panelVC.selectedContact = selectedContact
                 
             default:
                 break
