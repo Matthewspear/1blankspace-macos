@@ -501,9 +501,9 @@ extension MainViewController: NSTableViewDelegate
                         switch column
                         {
                         case tableView.tableColumns[0]:
-                            contactCell.textField?.stringValue  = business.tradename
-                        case tableView.tableColumns[1]:
                             contactCell.textField?.stringValue  = business.legalname
+                        case tableView.tableColumns[1]:
+                            contactCell.textField?.stringValue  = business.tradename
                         case tableView.tableColumns[2]:
                             contactCell.textField?.stringValue  = business.email
                         case tableView.tableColumns[3]:
