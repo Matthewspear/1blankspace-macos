@@ -11,33 +11,20 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate
 {
-  func applicationDidFinishLaunching(_ aNotification: Notification)
-  {
-    // Insert code here to initialize your application
-    checkFirstLaunch()
-  }
+    func applicationDidFinishLaunching(_ aNotification: Notification)
+    {
+        userDefaults.register(defaults: [
+        "login": "",
+        "rememberMe": false,
+        "SelectedEndpoint": 0
+        ])
+    }
+    
+    func applicationWillTerminate(_ aNotification: Notification)
+    {
+        userDefaults.synchronize()
+    }
+    
 
-  func applicationWillTerminate(_ aNotification: Notification)
-  {
-    // Insert code here to tear down your application
-    userDefaults.synchronize()
-  }
-  
-  func checkFirstLaunch()
-  {
-    if userDefaults.bool(forKey: "hasLaunched")
-    {
-      print("Launched before")
-    }
-    else
-    {
-      print("Launching for the first time...")
-      userDefaults.set("", forKey: "login")
-      userDefaults.set(false, forKey: "rememberMe")
-      userDefaults.set(0, forKey: "SelectedEndpoint")
-      userDefaults.set(true, forKey: "hasLaunched")
-      userDefaults.synchronize()
-    }
-  }
 }
 
