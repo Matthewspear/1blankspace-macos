@@ -322,6 +322,22 @@ class MainViewController: NSViewController
     @IBAction func removeAction(_ sender: NSButton)
     {
         print("Remove triggered")
+        isEnabled = false
+        
+        guard let sid = UserSession.sid else { return }
+        
+        API.remove(contact: selectedContact, endpoint: selectedEndpoint, sid: sid, completion: { result in
+            
+            self.contactsInEndpoint -= 1
+            notificationCenter.post(name: MainViewController.reloadDataNotif, object: self.selectedEndpoint)
+            
+        }, failure: { error in
+            
+            self.presentError(error)
+            self.isEnabled = true
+        })
+    }
+    
         
         // Call API remove method
         
