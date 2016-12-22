@@ -25,20 +25,33 @@ class MainViewController: NSViewController
     @IBOutlet var column3: NSTableColumn!
     @IBOutlet var column4: NSTableColumn!
     
-    static let reloadNotification = Notification.Name("reload-tables")
+    static let reloadTablesNotif = Notification.Name("reload-tables")
+    static let reloadDataNotif = Notification.Name("reload-data")
     
     var isEnabled: Bool  = false {
         didSet {
             isEnabled ? spinner.stopAnimation(nil) : spinner.startAnimation(nil)
             
             addButton.isEnabled = isEnabled
+            editButton.isEnabled = isEnabled
+            removeButton.isEnabled = isEnabled
+            
             endpointTableView.isEnabled = isEnabled
             groupTableView.isEnabled = isEnabled
             dataTableView.isEnabled = isEnabled
         }
     }
     
-    var contactsInEndpoint = 0
+    var contactsInEndpoint: Int {
+        get {
+            return userDefaults.integer(forKey: "contacts")
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: "contacts")
+        }
+    }
+    
     var currentContacts: [Contact] = []
     var currentGroups: [Group] = []
     
@@ -55,6 +68,18 @@ class MainViewController: NSViewController
         case 0: return Group(title: "All (\(contactsInEndpoint))", id: "")
         case 1...(currentGroups.count + 1): return currentGroups[index - 1]
         default: return nil
+        }
+    }
+    
+    var selectedGroupID: String? {
+        
+        if let groupid = selectedGroup?.id
+        {
+            return groupid.isEmpty ? nil : groupid
+        }
+        else
+        {
+            return nil
         }
     }
     
@@ -106,19 +131,21 @@ class MainViewController: NSViewController
         
         dataTableView.doubleAction = #selector(MainViewController.doubleClickAction)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.reloadTables), name: MainViewController.reloadNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.reloadTables), name: MainViewController.reloadTablesNotif, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.reloadData), name: MainViewController.reloadDataNotif, object: nil)
     }
     
-    func loadData(for endpoint: Endpoint)
+    func loadData(for endpoint: Endpoint, in group: String? = nil)
     {
         isEnabled = false
         
         guard let sid = UserSession.sid else {
-            
             displayLoginError()
-            isEnabled = false
             return
         }
+        
+        let printError: (Error) -> Void = { print($0) }
         
         API.group(endpoint, sid: sid, completion: { groups in
             
@@ -127,35 +154,43 @@ class MainViewController: NSViewController
             switch endpoint
             {
             case .personal:
-                API.personal(sid: sid, completion: { contacts in
+                
+                API.personal(group, search: nil, sid: sid, completion: { contacts in
+                    
+                    if group == nil
+                    {
+                        self.contactsInEndpoint = contacts.count
+                    }
                     
                     self.currentContacts = contacts
-                    self.contactsInEndpoint = contacts.count
-                    notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": true, "dataTable": true])
+                    notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": true, "dataTable": true, "keepGroup": true])
                     
-                }, failure: { error in
-                    
-                    print(error)
-                })
+                }, failure: printError)
                 
             case .business:
-                API.business(sid: sid, completion: { contacts in
+                API.business(group, search: nil, sid: sid, completion: { contacts in
+                    
+                    if group == nil
+                    {
+                        self.contactsInEndpoint = contacts.count
+                    }
                     
                     self.currentContacts = contacts
-                    self.contactsInEndpoint = contacts.count
-                    notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": true, "dataTable": true])
+                    notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": true, "dataTable": true, "keepGroup": true])
                     
-                }, failure: { error in
-                    
-                    print(error)
-                    
-                })
+                }, failure: printError)
             }
-            
-        }, failure: { error in
-            
-            print(error)
-        })
+        }, failure: printError)
+    }
+    
+    func reloadData(notification: NSNotification)
+    {
+        isEnabled = false
+        
+        if let value = notification.object as? Endpoint
+        {
+            loadData(for: value, in: selectedGroupID)
+        }
     }
     
     func reloadTables(notification: NSNotification)
@@ -165,6 +200,8 @@ class MainViewController: NSViewController
         if let dict = notification.object as? [String: Bool]
         {
             DispatchQueue.main.async {
+                
+                let selectedGroup = self.groupTableView.selectedRow
                 
                 if dict["groupTable"] == true
                 {
@@ -178,10 +215,16 @@ class MainViewController: NSViewController
                     self.dataTableView.reloadData()
                 }
                 
-                self.isEnabled = true
-                self.editButton.isEnabled = false
-                self.removeButton.isEnabled = false
+                if dict["keepGroup"] == true
+                {
+                    let indexset = IndexSet(integer: selectedGroup)
+                    self.groupTableView.selectRowIndexes(indexset, byExtendingSelection: false)
+                }
             }
+            
+            self.isEnabled = true
+            self.editButton.isEnabled = false
+            self.removeButton.isEnabled = false
         }
     }
     
@@ -311,12 +354,12 @@ class MainViewController: NSViewController
         
         let setPersonalContacts: ([PersonalContact]) -> Void = {
             self.currentContacts = $0
-            notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": false, "dataTable": true])
+            notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": false, "dataTable": true])
         }
         
         let setBusinessContacts: ([BusinessContact]) -> Void = {
             self.currentContacts = $0
-            notificationCenter.post(name: MainViewController.reloadNotification, object: ["groupTable": false, "dataTable": true])
+            notificationCenter.post(name: MainViewController.reloadTablesNotif, object: ["groupTable": false, "dataTable": true])
         }
         
         let printError: (NSError) -> Void = { error in print(error) }
