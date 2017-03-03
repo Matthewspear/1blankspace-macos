@@ -17,3 +17,16 @@ let keychain = Keychain(service: "uk.co.matthewspear.-blankspace")
 
 let userDefaults = UserDefaults.standard
 let notificationCenter = NotificationCenter.default
+
+
+// Aliases and functions
+
+typealias SortDescriptor<A> = (A,A) -> Bool
+
+func sortDescriptor<Value, Property>(property: @escaping (Value) -> Property, comparator: @escaping (Property) -> (Property) -> ComparisonResult, order: ComparisonResult) -> SortDescriptor<Value>
+{
+    return { value1, value2 in
+        
+        comparator(property(value1))(property(value2)) == order
+    }
+}

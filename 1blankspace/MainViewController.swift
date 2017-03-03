@@ -555,4 +555,56 @@ extension MainViewController: NSTableViewDelegate
         }
         return nil
     }
+    
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor])
+    {
+        // Personal Contact sort descriptors
+        
+        guard let descriptor = tableView.sortDescriptors.first else { return }
+        let order: ComparisonResult = descriptor.ascending ? .orderedAscending : .orderedDescending
+        
+        let sortPersonalContacts: SortDescriptor<PersonalContact> = sortDescriptor(property: {
+            guard let key = descriptor.key else { return "" }
+            switch key
+            {
+            case "column1": return $0.firstname
+            case "column2": return $0.surname
+            case "column3": return $0.email
+            case "column4": return $0.mobile
+            default: return ""
+            }
+            
+        }, comparator: String.localizedCaseInsensitiveCompare, order: order)
+        
+        
+        let sortBusinessContacts: SortDescriptor<BusinessContact> = sortDescriptor(property: {
+            guard let key = descriptor.key else { return "" }
+            switch key
+            {
+            case "column1": return $0.legalname
+            case "column2": return $0.tradename
+            case "column3": return $0.email
+            case "column4": return $0.phonenumber
+            default: return ""
+            }
+            
+        }, comparator: String.localizedCaseInsensitiveCompare, order: order)
+        
+        switch (selectedEndpoint)
+        {
+        case .personal:
+            if let contacts = currentContacts as? [PersonalContact]
+            {
+                currentContacts = contacts.sorted(by: sortPersonalContacts) as [Contact]
+            }
+            
+        case .business:
+            if let contacts = currentContacts as? [BusinessContact]
+            {
+                currentContacts = contacts.sorted(by: sortBusinessContacts) as [Contact]
+            }
+        }
+        
+        dataTableView.reloadData()
+    }
 }
